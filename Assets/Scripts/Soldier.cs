@@ -9,11 +9,22 @@ public class Soldier : MonoBehaviour
     [SerializeField] private Transform movePositionTransform;
     private NavMeshAgent navMeshAgent;
 
+    public HatType hatType = HatType.NoHat;
+
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         StartCoroutine("FindNewEnemy");
+
+        SetHat(RandomHat());
+    }
+
+    // For testing purposes.
+    HatType RandomHat()
+    {
+        var hatTypes = System.Enum.GetValues(typeof(HatType));
+        return (HatType)hatTypes.GetValue(Random.Range(0, hatTypes.Length));
     }
 
     IEnumerator FindNewEnemy()
@@ -22,8 +33,6 @@ public class Soldier : MonoBehaviour
         {
             var my_pos = GetComponent<Transform>().position;
             var soldiers = FindObjectsOfType<Soldier>();
-
-            Debug.Log(soldiers.Length);
 
             float? min_dist = null;
             Soldier? min_soldier = null;
@@ -70,5 +79,13 @@ public class Soldier : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    void SetHat(HatType hatType)
+    {
+        this.hatType = hatType;
+        GameObject child = transform.GetChild(0).gameObject;
+        MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
+        meshRenderer.material = Resources.Load<Material>("Hats/" + hatType.ToString());
     }
 }
