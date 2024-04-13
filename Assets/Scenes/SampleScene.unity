@@ -155,8 +155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5470b67eaa69a64d9f90554cd7446d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guyPrefab: {fileID: 3380617665453351429, guid: 992b641b2ba532843933bab80faa736a,
-    type: 3}
   spawnRedTeam: 1
 --- !u!4 &233226420
 Transform:
