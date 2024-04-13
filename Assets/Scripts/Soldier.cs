@@ -15,6 +15,9 @@ public class Soldier : MonoBehaviour
 
     public HatType hatType = HatType.NoHat;
 
+    public float engageDistance = 5;
+    public float shotSpeed = 10;
+
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -54,7 +57,7 @@ public class Soldier : MonoBehaviour
                 }
 
                 // repeatedly find nearest soldier, if it exists
-                if (min_dist != null && min_dist < 5)
+                if (min_dist != null && min_dist < engageDistance)
                 {
                     engagedEnemy = min_soldier;
                     navMeshAgent.isStopped = true;
@@ -78,11 +81,10 @@ public class Soldier : MonoBehaviour
     {
         while (engagedEnemy != null)
         {
-            Debug.Log("Launching projectile");
-            var newPos = new Vector3(transform.position.x, transform.position.y+2, transform.position.z);
+            var newPos = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
             GameObject projectile = Instantiate(Resources.Load<GameObject>("Projectile"), newPos, Quaternion.identity);
 
-            projectile.GetComponent<Rigidbody>().velocity = (engagedEnemy.transform.position - transform.position).normalized * 10.0f;
+            projectile.GetComponent<Rigidbody>().velocity = (engagedEnemy.transform.position - transform.position).normalized * shotSpeed;
             projectile.GetComponent<Projectile>().team = team;
 
             // fire every second
@@ -91,17 +93,6 @@ public class Soldier : MonoBehaviour
     }
 
     protected Soldier? engagedEnemy = null;
-    void OnTriggerEnter(Collider collider)
-    {
-        if (collider.gameObject.tag == "projectile")
-        {
-            health -= 20;
-            if (health <= 0)
-            {
-                Destroy(gameObject);
-            }
-        }
-    }
 
     public void SetHat(HatType hatType)
     {
