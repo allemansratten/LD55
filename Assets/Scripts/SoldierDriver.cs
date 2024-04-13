@@ -7,7 +7,6 @@ public class SoldierDriver : MonoBehaviour
 
     void Start()
     {
-        Spawn("A", "Basic", new Vector3(3, 0, 0));
         Spawn("B", "Basic", new Vector3(-3, 0, 3));
         Spawn("B", "Biggon", new Vector3(-4, 0, 3));
         Spawn("B", "Biggon", new Vector3(-5, 0, 3));
@@ -28,5 +27,10 @@ public class SoldierDriver : MonoBehaviour
         soldier.team = team;
 
         soldier.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Units/Team" + team);
+    }
+
+    public UnitSquad SpawnSquad(string team, string unitType, Vector3 position)
+    {
+        return new UnitSquad(4, Resources.Load<GameObject>("Units/Unit" + unitType), position, team);
     }
 }

@@ -38,10 +38,9 @@ public class SpawnOnClick : MonoBehaviour
 
     private void spawnUnit(Vector3 position)
     {
-        Debug.Log("Spawning unit");
         if (canSpawn)
         {
-            soldierDriver.Spawn("A", "Basic", position);
+            soldierDriver.SpawnSquad("A", "Basic", position);
         }
     }
 }
