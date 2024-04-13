@@ -10,8 +10,8 @@ public class Projectile : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         var soldier = collider.gameObject.GetComponent<Soldier>();
-        if(soldier is null) {
-            Destroy(gameObject);
+        if(soldier == null) {
+            // Destroy(gameObject);
         } else if(soldier.Team != team) {
             soldier.Hurt(25);
             Destroy(gameObject);

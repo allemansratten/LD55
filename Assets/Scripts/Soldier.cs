@@ -9,7 +9,6 @@ public class Soldier : MonoBehaviour
     protected string team;
     // Readonly for the public
     public string Team { get => team; }
-    private Transform movePositionTransform;
     protected NavMeshAgent navMeshAgent;
 
     public float health;
@@ -27,13 +26,14 @@ public class Soldier : MonoBehaviour
     {
         while (true)
         {
-            if(currentEnemy is null) {
+            if (engagedEnemy == null)
+            {
                 var my_pos = GetComponent<Transform>().position;
                 var soldiers = FindObjectsOfType<Soldier>();
 
                 float? min_dist = null;
                 // YOLO
-                #pragma warning disable CS8632
+#pragma warning disable CS8632
                 Soldier? min_soldier = null;
 
                 foreach (var soldier in soldiers)
@@ -54,10 +54,18 @@ public class Soldier : MonoBehaviour
                 }
 
                 // repeatedly find nearest soldier, if it exists
-                if (!(min_soldier is null))
+                if (min_dist != null && min_dist < 5)
+                {
+                    engagedEnemy = min_soldier;
+                    navMeshAgent.isStopped = true;
+                    StartCoroutine("StartShooting");
+                }
+                else if (min_soldier != null)
                 {
                     navMeshAgent.destination = min_soldier.GetComponent<Transform>().position;
                     navMeshAgent.isStopped = false;
+                    Debug.Log(min_dist);
+
                 }
             }
 
@@ -66,29 +74,32 @@ public class Soldier : MonoBehaviour
         }
     }
 
-    protected Soldier? currentEnemy = null;
+    IEnumerator StartShooting()
+    {
+        while (engagedEnemy != null)
+        {
+            Debug.Log("Launching projectile");
+            var newPos = new Vector3(transform.position.x, transform.position.y+2, transform.position.z);
+            GameObject projectile = Instantiate(Resources.Load<GameObject>("Projectile"), newPos, Quaternion.identity);
+
+            projectile.GetComponent<Rigidbody>().velocity = (engagedEnemy.transform.position - transform.position).normalized * 10.0f;
+            projectile.GetComponent<Projectile>().team = team;
+
+            // fire every second
+            yield return new WaitForSeconds(1.0f + Random.value);
+        }
+    }
+
+    protected Soldier? engagedEnemy = null;
     void OnTriggerEnter(Collider collider)
     {
-
-        if(collider.gameObject.tag == "projectile") {
+        if (collider.gameObject.tag == "projectile")
+        {
             health -= 20;
-            if (health <= 0) {
+            if (health <= 0)
+            {
                 Destroy(gameObject);
             }
-        }
-
-        var other = collider.gameObject.GetComponent<Soldier>();
-        // we did not collide with enemy
-        if (other is null || other.team == team)
-        {
-            return;
-        } else {
-            currentEnemy = other;
-        }
-
-        if(Random.value > 0.5) {
-            Destroy(gameObject);
-            // gameObject.GetComponent<Soldier>().Hurt(25);
         }
     }
 
@@ -111,9 +122,11 @@ public class Soldier : MonoBehaviour
 
     }
 
-    public void Hurt(float damage) {
+    public void Hurt(float damage)
+    {
         health -= damage;
-        if (health <= 0) {
+        if (health <= 0)
+        {
             Destroy(gameObject);
         }
     }
