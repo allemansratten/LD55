@@ -20,15 +20,9 @@ public class SpawnOnClick : MonoBehaviour
         soldierDriver = GameObject.Find("Game Controller").GetComponent<SoldierDriver>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void OnMouseDown()
     {
-        if (!this.canSpawn || EventSystem.current.IsPointerOverGameObject())
+        if (!this.canSpawn)
         {
             return;
         }

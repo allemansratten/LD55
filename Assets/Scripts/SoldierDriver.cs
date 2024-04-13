@@ -3,7 +3,6 @@ using UnityEngine.EventSystems;
 
 public class SoldierDriver : MonoBehaviour
 {
-
     private bool canSpawn = false;
 
     void Start()
@@ -22,27 +21,12 @@ public class SoldierDriver : MonoBehaviour
         };
     }
 
-    public void Spawn(string team, string unitType, Vector3 position) {
+    public void Spawn(string team, string unitType, Vector3 position)
+    {
         GameObject unitPrefab = Resources.Load<GameObject>("Units/Unit" + unitType);
         var soldier = Instantiate(unitPrefab, position, Quaternion.identity).GetComponent<Soldier>();
         soldier.team = team;
 
         soldier.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Units/Team" + team);
-    }
-
-    void OnMouseDown()
-    {
-        if (!this.canSpawn || EventSystem.current.IsPointerOverGameObject())
-        {
-            return;
-        }
-
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 100))
-        {
-            Spawn("A", "base", hit.point);
-        }
     }
 }
