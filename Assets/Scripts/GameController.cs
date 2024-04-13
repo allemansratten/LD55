@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public GameObject guyPrefab;
-    public GameObject teamToggle;
     public SpawnController spawnController;
 
     public bool spawnRedTeam = true;
@@ -29,6 +28,5 @@ public class GameController : MonoBehaviour
     public void SetSpawnRedTeam(bool isRedTeam)
     {
         spawnRedTeam = isRedTeam;
-        teamToggle.GetComponent<Image>().color = isRedTeam ? Color.red : Color.cyan;
     }
 }
