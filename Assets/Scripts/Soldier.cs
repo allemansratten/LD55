@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.MPE;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,7 +10,7 @@ public class Soldier : MonoBehaviour
     // Readonly for the public
     public string Team { get => team; }
     private Transform movePositionTransform;
-    private NavMeshAgent navMeshAgent;
+    protected NavMeshAgent navMeshAgent;
 
     public float health;
 
@@ -26,35 +27,38 @@ public class Soldier : MonoBehaviour
     {
         while (true)
         {
-            var my_pos = GetComponent<Transform>().position;
-            var soldiers = FindObjectsOfType<Soldier>();
+            if(currentEnemy is null) {
+                var my_pos = GetComponent<Transform>().position;
+                var soldiers = FindObjectsOfType<Soldier>();
 
-            float? min_dist = null;
-            // YOLO
-#pragma warning disable CS8632
-            Soldier? min_soldier = null;
+                float? min_dist = null;
+                // YOLO
+                #pragma warning disable CS8632
+                Soldier? min_soldier = null;
 
-            foreach (var soldier in soldiers)
-            {
-                // skip our team
-                if (soldier.team == team)
+                foreach (var soldier in soldiers)
                 {
-                    continue;
+                    // skip our team
+                    if (soldier.team == team)
+                    {
+                        continue;
+                    }
+
+                    var soldier_pos = soldier.GetComponent<Transform>().position;
+                    var soldier_dist = Vector3.Distance(my_pos, soldier_pos);
+                    if (min_dist is null || soldier_dist < min_dist)
+                    {
+                        min_dist = soldier_dist;
+                        min_soldier = soldier;
+                    }
                 }
 
-                var soldier_pos = soldier.GetComponent<Transform>().position;
-                var soldier_dist = Vector3.Distance(my_pos, soldier_pos);
-                if (min_dist is null || soldier_dist < min_dist)
+                // repeatedly find nearest soldier, if it exists
+                if (!(min_soldier is null))
                 {
-                    min_dist = soldier_dist;
-                    min_soldier = soldier;
+                    navMeshAgent.destination = min_soldier.GetComponent<Transform>().position;
+                    navMeshAgent.isStopped = false;
                 }
-            }
-
-            // repeatedly find nearest soldier, if it exists
-            if (!(min_soldier is null))
-            {
-                navMeshAgent.destination = min_soldier.GetComponent<Transform>().position;
             }
 
             // repeat every second
@@ -62,24 +66,30 @@ public class Soldier : MonoBehaviour
         }
     }
 
+    protected Soldier? currentEnemy = null;
     void OnTriggerEnter(Collider collider)
     {
-        var enemy = collider.gameObject.GetComponent<Soldier>();
+
+        if(collider.gameObject.tag == "projectile") {
+            health -= 20;
+            if (health <= 0) {
+                Destroy(gameObject);
+            }
+        }
+
+        var other = collider.gameObject.GetComponent<Soldier>();
         // we did not collide with enemy
-        if (enemy is null || enemy.team == team)
+        if (other is null || other.team == team)
         {
             return;
+        } else {
+            currentEnemy = other;
         }
 
-        if (Random.value > 0.5f)
-        {
-            Destroy(this.gameObject);
+        if(Random.value > 0.5) {
+            Destroy(gameObject);
+            // gameObject.GetComponent<Soldier>().Hurt(25);
         }
-    }
-
-    void Update()
-    {
-        // TODO: rotate in direction of velocity?
     }
 
     public void SetHat(HatType hatType)
@@ -98,5 +108,13 @@ public class Soldier : MonoBehaviour
         GameObject child = transform.Find("Beta_Surface").gameObject;
         SkinnedMeshRenderer meshRenderer = child.GetComponent<SkinnedMeshRenderer>();
         meshRenderer.material = Resources.Load<Material>("Units/Team" + team);
+
+    }
+
+    public void Hurt(float damage) {
+        health -= damage;
+        if (health <= 0) {
+            Destroy(gameObject);
+        }
     }
 }
