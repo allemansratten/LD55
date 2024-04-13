@@ -343,6 +343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 233226420}
   - component: {fileID: 233226419}
+  - component: {fileID: 233226421}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -382,6 +383,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &233226421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233226418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ca07e21bbedb1f409587f780d20b084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &252062206
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,9 +1381,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 233226419}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: StartBattle
+      - m_Target: {fileID: 233226421}
+        m_TargetAssemblyTypeName: EventManager, Assembly-CSharp
+        m_MethodName: BattleStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

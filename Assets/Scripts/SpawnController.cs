@@ -10,6 +10,11 @@ public class SpawnController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        EventManager.OnBattleStart += () =>
+        {
+            Debug.Log("Battle started");
+            this.canSpawn = false;
+        };
 
     }
 

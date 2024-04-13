@@ -26,13 +26,6 @@ public class GameController : MonoBehaviour
 
     }
 
-    // Triggered by "Start battle" button click
-    public void StartBattle()
-    {
-        Debug.Log("Battle started");
-        this.spawnController.ToggleSpawning(false);
-    }
-
     public void SetSpawnRedTeam(bool isRedTeam)
     {
         spawnRedTeam = isRedTeam;
