@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5724658739083383683}
   - component: {fileID: 6020202860808345947}
   m_Layer: 0
-  m_Name: SoldierB
+  m_Name: Soldier
   m_TagString: Soldier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 81008576d0c020ea5ab55a2355d3f9c8, type: 2}
+  - {fileID: 2100000, guid: 3f93eaf4bfac4308c85fadfd798c6dcb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -171,5 +171,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771d609c1e93d1139aae176e5f989034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: B
+  team: A
   movePositionTransform: {fileID: 0}

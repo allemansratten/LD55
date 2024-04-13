@@ -62,8 +62,4 @@ public class Soldier : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
-    // Update is called once per frame
-    void Update() { 
-    }
 }
