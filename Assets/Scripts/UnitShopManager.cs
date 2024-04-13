@@ -10,6 +10,7 @@ public class UnitShopManager : MonoBehaviour
     private readonly string[] tempUnitList = {
         "UnitBasic",
         "UnitArcher",
+        "UnitMage",
     };
 
     private string teamToSpawn = "A";

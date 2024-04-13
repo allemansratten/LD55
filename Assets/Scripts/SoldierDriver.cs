@@ -29,6 +29,7 @@ public class SoldierDriver : MonoBehaviour
     {
         GameObject newGameObject = new GameObject("Squad/" + unitType);
         UnitSquad unitSquad = newGameObject.AddComponent<UnitSquad>();
-        unitSquad.InitSquad(4, Resources.Load<GameObject>("Units/" + unitType), position, team);
+        GameObject unit = Resources.Load<GameObject>("Units/" + unitType);
+        unitSquad.InitSquad(unit.GetComponent<Soldier>().unitsPerSquad, unit, position, team);
     }
 }
