@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 233226419}
   - component: {fileID: 233226421}
   - component: {fileID: 233226422}
+  - component: {fileID: 233226423}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -367,7 +368,6 @@ MonoBehaviour:
   guyPrefab: {fileID: 3380617665453351429, guid: 992b641b2ba532843933bab80faa736a,
     type: 3}
   teamToggle: {fileID: 1227131977}
-  spawnController: {fileID: 491281188}
   spawnRedTeam: 1
 --- !u!4 &233226420
 Transform:
@@ -409,6 +409,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currencyText: {fileID: 784950185}
+--- !u!114 &233226423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233226418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68e262fffb53ca3209cfa428175512ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soldierPrefab: {fileID: 763888635797558459, guid: 2403108d0217c90b092b739b1225e84f,
+    type: 3}
+  teamDefinitions:
+  - team: A
+    material: {fileID: 2100000, guid: 3f93eaf4bfac4308c85fadfd798c6dcb, type: 2}
+  - team: B
+    material: {fileID: 2100000, guid: 81008576d0c020ea5ab55a2355d3f9c8, type: 2}
+  typeDefinitions:
+  - unitType: base
+    scale: {x: 1, y: 1, z: 1}
 --- !u!1 &252062206
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,7 +766,8 @@ GameObject:
   - component: {fileID: 491281186}
   - component: {fileID: 491281185}
   - component: {fileID: 491281184}
-  - component: {fileID: 491281188}
+  - component: {fileID: 491281189}
+  - component: {fileID: 491281190}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -839,7 +862,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &491281188
+--- !u!114 &491281189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491281183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 1
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 288aa4478a76d4b64a3f745fa7b08bb8, type: 2}
+  m_BuildHeightMesh: 0
+--- !u!114 &491281190
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -851,8 +905,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c4c26b22bda590448493b4834c7e767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guyPrefab: {fileID: 3380617665453351429, guid: 992b641b2ba532843933bab80faa736a,
-    type: 3}
 --- !u!1 &528364131
 GameObject:
   m_ObjectHideFlags: 0
