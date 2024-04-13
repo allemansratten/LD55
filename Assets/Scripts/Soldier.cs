@@ -21,6 +21,9 @@ public class Soldier : MonoBehaviour
     public float projectileDamage = 25;
     public int unitsPerSquad = 4;
     public GameObject projectilePrefab;
+    public Material outlinerMaterial;
+    public Material teamAMaterial;
+    public Material teamBMaterial;
 
     void Start()
     {
@@ -115,7 +118,13 @@ public class Soldier : MonoBehaviour
 
         GameObject child = transform.Find("Beta_Surface").gameObject;
         SkinnedMeshRenderer meshRenderer = child.GetComponent<SkinnedMeshRenderer>();
-        meshRenderer.material = Resources.Load<Material>("Units/Team" + team);
+
+        var materials = new List<Material>
+        {
+            team == "A" ? teamAMaterial : teamBMaterial,
+            outlinerMaterial
+        };
+        meshRenderer.SetMaterials(materials);
     }
 
     public void Hurt(float damage)

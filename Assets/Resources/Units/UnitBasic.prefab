@@ -295,6 +295,9 @@ MonoBehaviour:
   unitsPerSquad: 4
   projectilePrefab: {fileID: 3610127390360354354, guid: 0bbe6ef442984d6ad9d168da2397f008,
     type: 3}
+  outlinerMaterial: {fileID: 2100000, guid: 00c46ab89a9d478408a7f321142ea2ca, type: 2}
+  teamAMaterial: {fileID: 2100000, guid: 3f93eaf4bfac4308c85fadfd798c6dcb, type: 2}
+  teamBMaterial: {fileID: 2100000, guid: 81008576d0c020ea5ab55a2355d3f9c8, type: 2}
 --- !u!23 &4554753880589968054
 MeshRenderer:
   m_ObjectHideFlags: 0
