@@ -31,17 +31,10 @@ public class Soldier : MonoBehaviour
                 var my_pos = GetComponent<Transform>().position;
                 var soldiers = FindObjectsOfType<Soldier>();
 
-<<<<<<< HEAD
-            float? min_dist = null;
-            // YOLO
-#pragma warning disable CS8632
-            Soldier? min_soldier = null;
-=======
                 float? min_dist = null;
                 // YOLO
                 #pragma warning disable CS8632
                 Soldier? min_soldier = null;
->>>>>>> 2dda561 (add projectiles)
 
                 foreach (var soldier in soldiers)
                 {
@@ -91,6 +84,11 @@ public class Soldier : MonoBehaviour
             return;
         } else {
             currentEnemy = other;
+        }
+
+        if(Random.value > 0.5) {
+            Destroy(gameObject);
+            // gameObject.GetComponent<Soldier>().Hurt(25);
         }
     }
 

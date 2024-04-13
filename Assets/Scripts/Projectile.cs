@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour
         var soldier = collider.gameObject.GetComponent<Soldier>();
         if(soldier is null) {
             Destroy(gameObject);
-        } else if(soldier.team != team) {
+        } else if(soldier.Team != team) {
             soldier.Hurt(25);
             Destroy(gameObject);
         }   
