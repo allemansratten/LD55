@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public GameObject guyPrefab;
-    public SpawnController spawnController;
 
     public bool spawnRedTeam = true;
 
@@ -16,7 +15,6 @@ public class GameController : MonoBehaviour
         Instantiate(guyPrefab, new Vector3(0, 0, 0), Quaternion.identity);
 
         SetSpawnRedTeam(true);
-        this.spawnController.ToggleSpawning(true);
     }
 
     // Update is called once per frame

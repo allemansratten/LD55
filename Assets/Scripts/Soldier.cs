@@ -16,8 +16,10 @@ public class Soldier : MonoBehaviour
         StartCoroutine("FindNewEnemy");
     }
 
-    IEnumerator FindNewEnemy() {
-        while(true) {
+    IEnumerator FindNewEnemy()
+    {
+        while (true)
+        {
             var my_pos = GetComponent<Transform>().position;
             var soldiers = FindObjectsOfType<Soldier>();
 
@@ -27,22 +29,26 @@ public class Soldier : MonoBehaviour
             Soldier? min_soldier = null;
 
 
-            foreach(var soldier in soldiers) {
+            foreach (var soldier in soldiers)
+            {
                 // skip our team
-                if (soldier.team == team) {
+                if (soldier.team == team)
+                {
                     continue;
                 }
 
                 var soldier_pos = soldier.GetComponent<Transform>().position;
                 var soldier_dist = Vector3.Distance(my_pos, soldier_pos);
-                if (min_dist is null || soldier_dist < min_dist) {
+                if (min_dist is null || soldier_dist < min_dist)
+                {
                     min_dist = soldier_dist;
                     min_soldier = soldier;
                 }
             }
 
             // repeatedly find nearest soldier, if it exists
-            if(!(min_soldier is null)) {
+            if (!(min_soldier is null))
+            {
                 navMeshAgent.destination = min_soldier.GetComponent<Transform>().position;
             }
 
@@ -51,14 +57,17 @@ public class Soldier : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider collider) {
+    void OnTriggerEnter(Collider collider)
+    {
         var enemy = collider.gameObject.GetComponent<Soldier>();
         // we did not collide with enemy
-        if (enemy is null || enemy.team == team) {
+        if (enemy is null || enemy.team == team)
+        {
             return;
         }
 
-        if(Random.value > 0.5f) {
+        if (Random.value > 0.5f)
+        {
             Destroy(this.gameObject);
         }
     }

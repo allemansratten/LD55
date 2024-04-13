@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SpawnController : MonoBehaviour
+public class SpawnOnClick : MonoBehaviour
 {
-    public GameObject guyPrefab;
-    private bool canSpawn = false;
+    private SoldierDriver soldierDriver;
+
+    private bool canSpawn = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,7 @@ public class SpawnController : MonoBehaviour
             this.canSpawn = false;
         };
 
+        soldierDriver = GameObject.Find("Game Controller").GetComponent<SoldierDriver>();
     }
 
     // Update is called once per frame
@@ -42,14 +44,10 @@ public class SpawnController : MonoBehaviour
 
     private void spawnUnit(Vector3 position)
     {
+        Debug.Log("Spawning unit");
         if (canSpawn)
         {
-            Instantiate(guyPrefab, position, Quaternion.identity);
+            soldierDriver.Spawn("A", "Basic", position);
         }
-    }
-
-    public void ToggleSpawning(bool canSpawn)
-    {
-        this.canSpawn = canSpawn;
     }
 }
