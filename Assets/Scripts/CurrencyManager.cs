@@ -10,13 +10,13 @@ public class CurrencyManager : MonoBehaviour
 
     void Start()
     {
-        currencyText.text = '$' + currency.ToString();
+        // currencyText.text = '$' + currency.ToString();
     }
 
     public void AddCurrency(int amount)
     {
         currency += amount;
-        currencyText.text = '$' + currency.ToString();
+        // currencyText.text = '$' + currency.ToString();
     }
 
     public int GetCurrency()
