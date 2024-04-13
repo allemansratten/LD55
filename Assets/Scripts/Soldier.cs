@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Soldier : MonoBehaviour
 {
     public string team;
-    [SerializeField] private Transform movePositionTransform;
+    private Transform movePositionTransform;
     private NavMeshAgent navMeshAgent;
 
     public HatType hatType = HatType.NoHat;
@@ -35,8 +35,9 @@ public class Soldier : MonoBehaviour
             var soldiers = FindObjectsOfType<Soldier>();
 
             float? min_dist = null;
+            // YOLO
+            #pragma warning disable CS8632
             Soldier? min_soldier = null;
-
 
             foreach (var soldier in soldiers)
             {
@@ -66,19 +67,9 @@ public class Soldier : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider collider)
-    {
-        var enemy = collider.gameObject.GetComponent<Soldier>();
-        // we did not collide with enemy
-        if (enemy is null || enemy.team == team)
-        {
-            return;
-        }
 
-        if (Random.value > 0.5f)
-        {
-            Destroy(this.gameObject);
-        }
+    void Update() {
+        // TODO: rotate in direction of velocity?
     }
 
     void SetHat(HatType hatType)
