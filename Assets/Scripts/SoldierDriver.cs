@@ -8,8 +8,8 @@ public class SoldierDriver : MonoBehaviour
     void Start()
     {
         Spawn("B", "Basic", new Vector3(-3, 0, 3));
-        Spawn("B", "Biggon", new Vector3(-4, 0, 3));
-        Spawn("B", "Biggon", new Vector3(-5, 0, 3));
+        Spawn("B", "Basic", new Vector3(-4, 0, 3));
+        Spawn("B", "Basic", new Vector3(-5, 0, 3));
         Spawn("B", "Basic", new Vector3(-6, 0, 3));
         Spawn("B", "Basic", new Vector3(-7, 0, 3));
 

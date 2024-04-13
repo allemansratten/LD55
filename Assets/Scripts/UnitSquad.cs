@@ -15,10 +15,14 @@ public class UnitSquad : MonoBehaviour
 
     public UnitSquad(int squadSize, GameObject unitPrefab, Vector3 position, string team)
     {
+        var hatTypes = System.Enum.GetValues(typeof(HatType));
+        HatType squadHat = (HatType)hatTypes.GetValue(Random.Range(0, hatTypes.Length));
+
         for (int i = 0; i < squadSize; i++)
         {
             // TODO: calculate position based on squad size / formation
             var soldier = Instantiate(unitPrefab, position + new Vector3(2 * i, 0, 0), Quaternion.identity).GetComponent<Soldier>();
+            soldier.SetHat(squadHat);
             soldier.team = team;
             soldier.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Units/Team" + team);
             squadMembers.Add(soldier);

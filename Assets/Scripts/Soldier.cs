@@ -16,15 +16,6 @@ public class Soldier : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         StartCoroutine("FindNewEnemy");
-
-        SetHat(RandomHat());
-    }
-
-    // For testing purposes.
-    HatType RandomHat()
-    {
-        var hatTypes = System.Enum.GetValues(typeof(HatType));
-        return (HatType)hatTypes.GetValue(Random.Range(0, hatTypes.Length));
     }
 
     IEnumerator FindNewEnemy()
@@ -36,7 +27,7 @@ public class Soldier : MonoBehaviour
 
             float? min_dist = null;
             // YOLO
-            #pragma warning disable CS8632
+#pragma warning disable CS8632
             Soldier? min_soldier = null;
 
             foreach (var soldier in soldiers)
@@ -68,11 +59,12 @@ public class Soldier : MonoBehaviour
     }
 
 
-    void Update() {
+    void Update()
+    {
         // TODO: rotate in direction of velocity?
     }
 
-    void SetHat(HatType hatType)
+    public void SetHat(HatType hatType)
     {
         this.hatType = hatType;
         GameObject child = transform.GetChild(0).gameObject;
