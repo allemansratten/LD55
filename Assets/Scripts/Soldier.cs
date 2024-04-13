@@ -20,15 +20,6 @@ public class Soldier : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         StartCoroutine("FindNewEnemy");
-
-        SetHat(RandomHat());
-    }
-
-    // For testing purposes.
-    HatType RandomHat()
-    {
-        var hatTypes = System.Enum.GetValues(typeof(HatType));
-        return (HatType)hatTypes.GetValue(Random.Range(0, hatTypes.Length));
     }
 
     IEnumerator FindNewEnemy()
@@ -71,7 +62,6 @@ public class Soldier : MonoBehaviour
         }
     }
 
-
     void OnTriggerEnter(Collider collider)
     {
         var enemy = collider.gameObject.GetComponent<Soldier>();
@@ -92,7 +82,7 @@ public class Soldier : MonoBehaviour
         // TODO: rotate in direction of velocity?
     }
 
-    void SetHat(HatType hatType)
+    public void SetHat(HatType hatType)
     {
         this.hatType = hatType;
 
