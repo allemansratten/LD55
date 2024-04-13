@@ -3,19 +3,28 @@ using UnityEngine.EventSystems;
 
 public class SoldierDriver : MonoBehaviour
 {
+    public bool debugSpawnEnemies;
 
     void Start()
     {
-        Spawn("B", "UnitBasic", new Vector3(-3, 0, 3));
-        Spawn("B", "UnitArcher", new Vector3(-4, 0, 3));
-        Spawn("B", "UnitArcher", new Vector3(-5, 0, 3));
-        Spawn("B", "UnitBasic", new Vector3(-6, 0, 3));
-        Spawn("B", "UnitBasic", new Vector3(-7, 0, 3));
+        if (debugSpawnEnemies)
+        {
+            SpawnDebugEnemies();
+        }
 
         EventManager.OnBattleStart += () =>
         {
-            Debug.Log("Battle started");
+            SpawnDebugEnemies();
         };
+    }
+
+    void SpawnDebugEnemies()
+    {
+        Spawn("B", "UnitBasic", new Vector3(3, 0, 3));
+        Spawn("B", "UnitArcher", new Vector3(4, 0, 3));
+        Spawn("B", "UnitArcher", new Vector3(5, 0, 3));
+        Spawn("B", "UnitBasic", new Vector3(6, 0, 3));
+        Spawn("B", "UnitBasic", new Vector3(7, 0, 3));
     }
 
     public void Spawn(string team, string unitType, Vector3 position)
