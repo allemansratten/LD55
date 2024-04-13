@@ -9,6 +9,8 @@ public class Soldier : MonoBehaviour
     private Transform movePositionTransform;
     private NavMeshAgent navMeshAgent;
 
+    public float health;
+
     public HatType hatType = HatType.NoHat;
 
     void Start()
@@ -58,6 +60,20 @@ public class Soldier : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider collider)
+    {
+        var enemy = collider.gameObject.GetComponent<Soldier>();
+        // we did not collide with enemy
+        if (enemy is null || enemy.team == team)
+        {
+            return;
+        }
+
+        if (Random.value > 0.5f)
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     void Update()
     {

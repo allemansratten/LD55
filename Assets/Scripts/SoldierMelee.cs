@@ -10,23 +10,6 @@ public class SoldierMelee : Soldier
         attackAnimation = GetComponent<Animation>();
     }
 
-    #pragma warning disable CS8632
-    private Soldier? currentTarget = null;
-
-    void OnTriggerEnter(Collider collider)
-    {
-        currentTarget = collider.gameObject.GetComponent<Soldier>();
-        // we did not collide with enemy
-        if (currentTarget is null || currentTarget.team == team)
-        {
-            currentTarget = null;
-            return;
-        } else {
-        // attackAnimation.Play();
-        }
-
-    }
-
     void Update() {
         attackAnimation.Play();
         Debug.Log("STARTING");
@@ -36,10 +19,19 @@ public class SoldierMelee : Soldier
     }
 
     void LandHit() {
-        // TODO: start fight animation and then subtract health
-        if(!(currentTarget is null)) {
-            Destroy(currentTarget);
-        }
         Debug.Log("Lang Hit!");
     }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        var enemy = collider.gameObject.GetComponent<Soldier>();
+        // we did not collide with enemy
+        if (enemy is null || enemy.team == team)
+        {
+            return;
+        }
+
+        Debug.Log("Override");
+    }
+
 }
