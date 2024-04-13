@@ -7,14 +7,23 @@ public class Projectile : MonoBehaviour
 {
 
     public string team;
+    public float damage = 25;
+
     void OnTriggerEnter(Collider collider)
     {
         var soldier = collider.gameObject.GetComponent<Soldier>();
-        if(soldier == null) {
-            // Destroy(gameObject);
-        } else if(soldier.Team != team) {
-            soldier.Hurt(25);
+        bool isSoldier = soldier != null;
+        if (!isSoldier)
+        {
+            if (collider.gameObject.name == "Ground")
+            {
+                Destroy(gameObject);
+            }
+        }
+        else if (soldier.Team != team)
+        {
+            soldier.Hurt(damage);
             Destroy(gameObject);
-        }   
+        }
     }
 }

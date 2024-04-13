@@ -8,10 +8,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1986397860280639848, guid: 615675ec7948e4dfbab001d8434ef097,
+        type: 3}
+      propertyPath: engageDistance
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986397860280639848, guid: 615675ec7948e4dfbab001d8434ef097,
+        type: 3}
+      propertyPath: projectileSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986397860280639848, guid: 615675ec7948e4dfbab001d8434ef097,
+        type: 3}
+      propertyPath: projectileDamage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5179891727131161294, guid: 615675ec7948e4dfbab001d8434ef097,
         type: 3}
       propertyPath: m_Name
-      value: UnitBiggon
+      value: UnitArcher
       objectReference: {fileID: 0}
     - target: {fileID: 5524083549676988532, guid: 615675ec7948e4dfbab001d8434ef097,
         type: 3}

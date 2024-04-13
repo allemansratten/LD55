@@ -9,7 +9,7 @@ public class UnitShopManager : MonoBehaviour
     // TODO: replace with actual unit list from the game
     private readonly string[] tempUnitList = {
         "UnitBasic",
-        "UnitBiggon"
+        "UnitArcher",
     };
 
     private string teamToSpawn = "A";
