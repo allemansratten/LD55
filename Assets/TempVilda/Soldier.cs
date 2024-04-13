@@ -21,6 +21,8 @@ public class Soldier : MonoBehaviour
             var my_pos = GetComponent<Transform>().position;
             var soldiers = FindObjectsOfType<Soldier>();
 
+            Debug.Log(soldiers.Length);
+
             float? min_dist = null;
             Soldier? min_soldier = null;
 
@@ -37,9 +39,12 @@ public class Soldier : MonoBehaviour
                     min_dist = soldier_dist;
                     min_soldier = soldier;
                 }
-            }        
-            // repeatedly find nearest soldier
-            navMeshAgent.destination = min_soldier.GetComponent<Transform>().position;
+            }
+
+            // repeatedly find nearest soldier, if it exists
+            if(!(min_soldier is null)) {
+                navMeshAgent.destination = min_soldier.GetComponent<Transform>().position;
+            }
 
             // repeat every second
             yield return new WaitForSeconds(1.0f);
@@ -47,10 +52,9 @@ public class Soldier : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider collider) {
-
         var enemy = collider.gameObject.GetComponent<Soldier>();
         // we did not collide with enemy
-        if (enemy is null) {
+        if (enemy is null || enemy.team == team) {
             return;
         }
 
