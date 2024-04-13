@@ -15,8 +15,9 @@ public class Soldier : MonoBehaviour
 
     public HatType hatType = HatType.NoHat;
 
-    public float engageDistance = 5;
-    public float shotSpeed = 10;
+    public float engageDistance = 25;
+    public float projectileSpeed = 10;
+    public float projectileDamage = 25;
 
     void Start()
     {
@@ -84,8 +85,9 @@ public class Soldier : MonoBehaviour
             var newPos = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
             GameObject projectile = Instantiate(Resources.Load<GameObject>("Projectile"), newPos, Quaternion.identity);
 
-            projectile.GetComponent<Rigidbody>().velocity = (engagedEnemy.transform.position - transform.position).normalized * shotSpeed;
+            projectile.GetComponent<Rigidbody>().velocity = (engagedEnemy.transform.position - transform.position).normalized * projectileSpeed;
             projectile.GetComponent<Projectile>().team = team;
+            projectile.GetComponent<Projectile>().damage = projectileDamage;
 
             // fire every second
             yield return new WaitForSeconds(1.0f + Random.value);
