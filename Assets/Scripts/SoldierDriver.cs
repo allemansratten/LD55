@@ -25,8 +25,10 @@ public class SoldierDriver : MonoBehaviour
         soldier.SetTeam(team);
     }
 
-    public UnitSquad SpawnSquad(string team, string unitType, Vector3 position)
+    public void SpawnSquad(string team, string unitType, Vector3 position)
     {
-        return new UnitSquad(4, Resources.Load<GameObject>("Units/" + unitType), position, team);
+        GameObject newGameObject = new GameObject("Squad/" + unitType);
+        UnitSquad unitSquad = newGameObject.AddComponent<UnitSquad>();
+        unitSquad.InitSquad(4, Resources.Load<GameObject>("Units/" + unitType), position, team);
     }
 }
