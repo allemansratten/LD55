@@ -19,8 +19,7 @@ public class UnitSquad : MonoBehaviour
         {
             // TODO: calculate position based on squad size / formation
             var soldier = Instantiate(unitPrefab, position + new Vector3(2 * i, 0, 0), Quaternion.identity).GetComponent<Soldier>();
-            soldier.team = team;
-            soldier.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Units/Team" + team);
+            soldier.SetTeam(team);
             squadMembers.Add(soldier);
         }
     }
