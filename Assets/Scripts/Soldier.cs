@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.MPE;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,7 +23,7 @@ public class Soldier : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
 
-        StartCoroutine("FindNewEnemy");
+        StartCoroutine(nameof(FindNewEnemy));
     }
 
     IEnumerator FindNewEnemy()
@@ -63,7 +62,7 @@ public class Soldier : MonoBehaviour
                 {
                     engagedEnemy = min_soldier;
                     navMeshAgent.isStopped = true;
-                    StartCoroutine("StartShooting");
+                    StartCoroutine(nameof(StartShooting));
                 }
                 else if (min_soldier != null)
                 {

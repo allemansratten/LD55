@@ -1,15 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using BasicBehaviour;
 
 public class UnitSquad : MonoBehaviour
 {
     public string team;
     private HatType squadHat;
-    private List<Soldier> squadMembers = new List<Soldier>();
+    private readonly List<Soldier> squadMembers = new();
 
-    public void addSquadMember(Soldier soldier)
+    public void AddSquadMember(Soldier soldier)
     {
         squadMembers.Add(soldier);
     }
@@ -17,7 +16,7 @@ public class UnitSquad : MonoBehaviour
     void Start()
     {
         var hatTypes = System.Enum.GetValues(typeof(HatType));
-        HatType squadHat = (HatType)hatTypes.GetValue(Random.Range(0, hatTypes.Length));
+        squadHat = (HatType)hatTypes.GetValue(Random.Range(0, hatTypes.Length));
     }
 
     public void SetHat(HatType hat)
@@ -38,7 +37,15 @@ public class UnitSquad : MonoBehaviour
             soldier.transform.parent = transform;
             soldier.SetHat(squadHat);
             soldier.SetTeam(team);
+            var clickEvent = soldier.gameObject.AddComponent<ClickableUnit>();
+            clickEvent.MouseDown += OnSoldierClicked;
+
             squadMembers.Add(soldier);
         }
+    }
+
+    private void OnSoldierClicked()
+    {
+        Debug.Log("Soldier clicked!");
     }
 }
