@@ -3,7 +3,6 @@ using UnityEngine.EventSystems;
 
 public class SoldierDriver : MonoBehaviour
 {
-    private bool canSpawn = false;
 
     void Start()
     {
@@ -16,7 +15,6 @@ public class SoldierDriver : MonoBehaviour
         EventManager.OnBattleStart += () =>
         {
             Debug.Log("Battle started");
-            this.canSpawn = false;
         };
     }
 

@@ -21,4 +21,17 @@ public class SoldierMelee : Soldier
     void LandHit() {
         Debug.Log("Lang Hit!");
     }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        var enemy = collider.gameObject.GetComponent<Soldier>();
+        // we did not collide with enemy
+        if (enemy is null || enemy.team == team)
+        {
+            return;
+        }
+
+        Debug.Log("Override");
+    }
+
 }

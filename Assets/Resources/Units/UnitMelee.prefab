@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6792936119751158183}
   - component: {fileID: 790271447879702978}
   - component: {fileID: 3164428928187741843}
-  - component: {fileID: 456814124163625188}
+  - component: {fileID: 1723148575640717842}
   m_Layer: 0
   m_Name: UnitMelee
   m_TagString: Soldier
@@ -160,7 +160,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &456814124163625188
+--- !u!114 &1723148575640717842
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,10 +169,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1799886400796665457}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 771d609c1e93d1139aae176e5f989034, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fbbe28b89a700715b5eb3a41cefd8e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   team: 
+  health: 100
   hatType: 0
 --- !u!1 &3709708785766276526
 GameObject:

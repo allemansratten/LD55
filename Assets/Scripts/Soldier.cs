@@ -9,6 +9,8 @@ public class Soldier : MonoBehaviour
     private Transform movePositionTransform;
     private NavMeshAgent navMeshAgent;
 
+    public float health;
+
     public HatType hatType = HatType.NoHat;
 
     void Start()
