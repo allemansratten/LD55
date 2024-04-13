@@ -288,6 +288,8 @@ MonoBehaviour:
   engageDistance: 5
   projectileSpeed: 10
   projectileDamage: 25
+  projectilePrefab: {fileID: 3610127390360354354, guid: 0bbe6ef442984d6ad9d168da2397f008,
+    type: 3}
 --- !u!4 &5524083549676988532 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dfdbcb652711a42fd911c22ba2f8ee3e,
