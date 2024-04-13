@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using BasicBehaviour;
 
 public class UnitSquad : MonoBehaviour
 {
