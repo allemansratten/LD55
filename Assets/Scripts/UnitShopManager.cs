@@ -12,6 +12,8 @@ public class UnitShopManager : MonoBehaviour
         "UnitBiggon"
     };
 
+    private string teamToSpawn = "A";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +71,11 @@ public class UnitShopManager : MonoBehaviour
         }
     }
 
+    public void SwitchTeam()
+    {
+        teamToSpawn = teamToSpawn == "A" ? "B" : "A";
+    }
+
     private void UnitSelected(string unit)
     {
         Debug.Log("Unit selected: " + unit);
@@ -79,7 +86,7 @@ public class UnitShopManager : MonoBehaviour
     {
         if (isSpawningEnabled && unitBeingSpawned != null)
         {
-            soldierDriver.SpawnSquad("A", unitBeingSpawned, position);
+            soldierDriver.SpawnSquad(teamToSpawn, unitBeingSpawned, position);
         }
         unitBeingSpawned = null;
     }
