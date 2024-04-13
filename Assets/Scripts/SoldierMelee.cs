@@ -41,7 +41,7 @@ public class SoldierMelee : Soldier
     {
         while (currentEnemy != null)
         {
-            GameObject projectile = Instantiate(Resources.Load<GameObject>("Projectile"), transform.position, Quaternion.identity);
+            GameObject projectile = Instantiate(Resources.Load<GameObject>("Projectile"), transform.position + Vector3.up, Quaternion.identity);
 
             projectile.GetComponent<Rigidbody>().velocity = (currentEnemy.transform.position - transform.position).normalized * 10.0f;
             projectile.GetComponent<Projectile>().team = team;

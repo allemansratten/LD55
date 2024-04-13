@@ -40,7 +40,7 @@ public class SpawnOnClick : MonoBehaviour
     {
         if (canSpawn)
         {
-            soldierDriver.SpawnSquad("A", "UnitBasic", position);
+            soldierDriver.SpawnSquad("A", "UnitMelee", position);
         }
     }
 }
