@@ -17,4 +17,10 @@ public class GameController : MonoBehaviour
     {
 
     }
+
+    // Triggered by "Start battle" button click
+    public void StartBattle()
+    {
+        Debug.Log("Battle started");
+    }
 }
