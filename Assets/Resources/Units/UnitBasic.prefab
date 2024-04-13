@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: A
-  movePositionTransform: {fileID: 0}
+  health: 0
   hatType: 0
 --- !u!1 &5937730976735179341
 GameObject:
