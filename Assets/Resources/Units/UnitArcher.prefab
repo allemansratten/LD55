@@ -10,6 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1986397860280639848, guid: 615675ec7948e4dfbab001d8434ef097,
         type: 3}
+      propertyPath: unitsPerSquad
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986397860280639848, guid: 615675ec7948e4dfbab001d8434ef097,
+        type: 3}
       propertyPath: engageDistance
       value: 25
       objectReference: {fileID: 0}

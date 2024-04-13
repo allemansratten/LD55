@@ -15,9 +15,11 @@ public class Soldier : MonoBehaviour
 
     public HatType hatType = HatType.NoHat;
 
+    // Values to be overridden in the editor for different prefabs
     public float engageDistance = 25;
     public float projectileSpeed = 10;
     public float projectileDamage = 25;
+    public int unitsPerSquad = 4;
     public GameObject projectilePrefab;
 
     void Start()
@@ -114,7 +116,6 @@ public class Soldier : MonoBehaviour
         GameObject child = transform.Find("Beta_Surface").gameObject;
         SkinnedMeshRenderer meshRenderer = child.GetComponent<SkinnedMeshRenderer>();
         meshRenderer.material = Resources.Load<Material>("Units/Team" + team);
-
     }
 
     public void Hurt(float damage)
