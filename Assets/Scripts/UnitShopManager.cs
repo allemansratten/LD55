@@ -42,17 +42,18 @@ public class UnitShopManager : MonoBehaviour
 
         }
         // Get the root visual element of the UI
-        VisualElement root = uiDocument.rootVisualElement;
+        VisualElement shopUiElement = uiDocument.rootVisualElement.Q("unit-shop");
 
         foreach (var unit in tempUnitList)
         {
             Button button = new()
             {
                 name = unit,
-                text = unit
+                text = unit,
             };
+            button.AddToClassList("button");
             button.clicked += () => UnitSelected(unit);
-            root.Add(button);
+            shopUiElement.Add(button);
         }
     }
 
