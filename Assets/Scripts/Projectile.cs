@@ -55,7 +55,7 @@ public class Projectile : MonoBehaviour
                 soldier.Hurt(damage);
                 // also knock back (TODO: only for earth)
                 var direction = (soldier.transform.position - position).normalized;
-                soldier.gameObject.GetComponent<Rigidbody>().AddForce(direction * 100, ForceMode.Impulse);
+                soldier.gameObject.GetComponent<Rigidbody>().AddForce(direction * 300, ForceMode.Impulse);
             }
         }
         // For debugging, spawn a ring with this radius
