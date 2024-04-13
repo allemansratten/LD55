@@ -1,9 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Button.uss?fileID=7433441132597879392&amp;guid=221373136948cb14596d14ab4d9b8429&amp;type=3#Button" />
-    <ui:VisualElement style="flex-grow: 1;">
-        <ui:VisualElement name="Container" style="flex-grow: 1; width: 237px; padding-top: 10%; padding-bottom: 10%; padding-right: 0; padding-left: 5%; background-color: rgba(24, 24, 24, 0.11);">
-            <ui:Button text="Start battle" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button" class="button" />
-            <ui:Button text="Team toggle" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button" class="button" />
+    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;">
+        <ui:VisualElement name="Container" picking-mode="Ignore" style="flex-grow: 1; width: 184px; padding-top: 10%; padding-bottom: 10%; padding-right: 2%; padding-left: 2%; background-color: rgba(24, 24, 24, 0);">
+            <ui:Button text="Start battle" parse-escape-sequences="true" display-tooltip-when-elided="true" name="button-start" class="button" />
+            <ui:Button text="Team toggle" parse-escape-sequences="true" display-tooltip-when-elided="true" name="button-team" class="button" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
