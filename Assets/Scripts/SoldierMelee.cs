@@ -10,7 +10,8 @@ public class SoldierMelee : Soldier
         attackAnimation = GetComponent<Animation>();
     }
 
-    void Update() {
+    void Update()
+    {
         attackAnimation.Play();
         Debug.Log("STARTING");
         Debug.Log(attackAnimation);
@@ -18,7 +19,8 @@ public class SoldierMelee : Soldier
         Debug.Log(attackAnimation.clip);
     }
 
-    void LandHit() {
+    void LandHit()
+    {
         Debug.Log("Lang Hit!");
     }
 
@@ -26,7 +28,7 @@ public class SoldierMelee : Soldier
     {
         var enemy = collider.gameObject.GetComponent<Soldier>();
         // we did not collide with enemy
-        if (enemy is null || enemy.team == team)
+        if (enemy is null || enemy.Team == team)
         {
             return;
         }

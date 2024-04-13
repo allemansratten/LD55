@@ -5,7 +5,9 @@ using UnityEngine.AI;
 
 public class Soldier : MonoBehaviour
 {
-    public string team;
+    protected string team;
+    // Readonly for the public
+    public string Team { get => team; }
     private Transform movePositionTransform;
     private NavMeshAgent navMeshAgent;
 
@@ -83,8 +85,18 @@ public class Soldier : MonoBehaviour
     public void SetHat(HatType hatType)
     {
         this.hatType = hatType;
-        GameObject child = transform.GetChild(0).gameObject;
+
+        GameObject child = transform.Find("Hat").gameObject;
         MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
         meshRenderer.material = Resources.Load<Material>("Hats/" + hatType.ToString());
+    }
+
+    public void SetTeam(string team)
+    {
+        this.team = team;
+
+        GameObject child = transform.Find("Beta_Surface").gameObject;
+        SkinnedMeshRenderer meshRenderer = child.GetComponent<SkinnedMeshRenderer>();
+        meshRenderer.material = Resources.Load<Material>("Units/Team" + team);
     }
 }
