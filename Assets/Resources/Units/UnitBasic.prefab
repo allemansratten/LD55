@@ -210,7 +210,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5179891727131161294}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ba09f020c335a43788ca3b07c34a6a24, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -225,7 +225,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.99, z: 0}
+  m_Center: {x: 0, y: 1.08, z: 0}
 --- !u!195 &2141522900841400767
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -256,8 +256,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5179891727131161294}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
+  m_Mass: 75
+  m_Drag: 0.2
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -292,6 +292,7 @@ MonoBehaviour:
   engageDistance: 5
   projectileSpeed: 10
   projectileDamage: 25
+  unitsPerSquad: 4
   projectilePrefab: {fileID: 3610127390360354354, guid: 0bbe6ef442984d6ad9d168da2397f008,
     type: 3}
 --- !u!23 &4554753880589968054
