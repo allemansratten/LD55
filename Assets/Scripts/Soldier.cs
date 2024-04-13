@@ -18,6 +18,7 @@ public class Soldier : MonoBehaviour
     public float engageDistance = 25;
     public float projectileSpeed = 10;
     public float projectileDamage = 25;
+    public GameObject projectilePrefab;
 
     void Start()
     {
@@ -83,9 +84,10 @@ public class Soldier : MonoBehaviour
         while (engagedEnemy != null)
         {
             var newPos = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
-            GameObject projectile = Instantiate(Resources.Load<GameObject>("Projectile"), newPos, Quaternion.identity);
+            var towardsEnemy = (engagedEnemy.transform.position - transform.position).normalized;
+            GameObject projectile = Instantiate(projectilePrefab, newPos, Quaternion.LookRotation(towardsEnemy));
 
-            projectile.GetComponent<Rigidbody>().velocity = (engagedEnemy.transform.position - transform.position).normalized * projectileSpeed;
+            projectile.GetComponent<Rigidbody>().velocity = towardsEnemy * projectileSpeed;
             projectile.GetComponent<Projectile>().team = team;
             projectile.GetComponent<Projectile>().damage = projectileDamage;
 
