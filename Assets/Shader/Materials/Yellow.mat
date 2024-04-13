@@ -100,12 +100,13 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
+    - _Flashing_Intensity: 0.3
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Max: 1
     - _Metallic: 0
-    - _Min: 0.3
+    - _Min: 0.34
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
