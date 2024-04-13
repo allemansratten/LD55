@@ -114,7 +114,6 @@ public class Soldier : MonoBehaviour
         GameObject child = transform.Find("Beta_Surface").gameObject;
         SkinnedMeshRenderer meshRenderer = child.GetComponent<SkinnedMeshRenderer>();
         meshRenderer.material = Resources.Load<Material>("Units/Team" + team);
-
     }
 
     public void Hurt(float damage)
