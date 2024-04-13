@@ -68,6 +68,21 @@ public class Soldier : MonoBehaviour
     }
 
 
+    void OnTriggerEnter(Collider collider)
+    {
+        var enemy = collider.gameObject.GetComponent<Soldier>();
+        // we did not collide with enemy
+        if (enemy is null || enemy.team == team)
+        {
+            return;
+        }
+
+        if (Random.value > 0.5f)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     void Update() {
         // TODO: rotate in direction of velocity?
     }
