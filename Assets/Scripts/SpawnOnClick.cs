@@ -47,35 +47,7 @@ public class SpawnOnClick : MonoBehaviour
         Debug.Log("Spawning unit");
         if (canSpawn)
         {
-            soldierDriver.Spawn("A", "base", position);
+            soldierDriver.Spawn("A", "Basic", position);
         }
     }
-
-
-    // void Spawn(string team, string unitType, Vector3 position)
-    // {
-    //     var soldier = Instantiate(soldierPrefab, position, Quaternion.identity).GetComponent<Soldier>();
-    //     soldier.team = team;
-
-    //     // change material on team
-    //     foreach (var def in teamDefinitions)
-    //     {
-    //         if (def.team == team)
-    //         {
-    //             soldier.GetComponent<MeshRenderer>().material = def.material;
-    //             break;
-    //         }
-    //     }
-
-    //     // change scale on unit type
-    //     foreach (var def in typeDefinitions)
-    //     {
-    //         if (def.unitType == unitType)
-    //         {
-    //             soldier.GetComponent<Transform>().localScale = def.scale;
-    //             break;
-    //         }
-    //     }
-
-    // }
 }
