@@ -11,16 +11,11 @@ public class UI : MonoBehaviour
         UnitShopManager unitShopManager = GameObject.Find("Ground").GetComponent<UnitShopManager>();
 
         Button buttonStart = root.Q<Button>("button-start");
-        Button buttonTeam = root.Q<Button>("button-team");
 
         buttonStart.clicked += () =>
         {
+            // buttonStart.AddToClassList();
             EventManager.BattleStart();
-        };
-
-        buttonTeam.clicked += () =>
-        {
-            unitShopManager.SwitchTeam();
-        };
+        };   
     }
 }
