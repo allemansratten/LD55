@@ -1,18 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class UnitShopManager : MonoBehaviour
 {
     private SoldierDriver soldierDriver;
-    private string unitBeingSpawned;
+    private string selectedUnitType;
     private bool isSpawningEnabled = true;
-    // TODO: replace with actual unit list from the game
-    private readonly string[] tempUnitList = {
-        "UnitBasic",
-        "UnitArcher",
-        "UnitMage",
-    };
-
     private string teamToSpawn = "A";
 
     // Start is called before the first frame update
@@ -32,35 +26,38 @@ public class UnitShopManager : MonoBehaviour
         CreateGuiElements();
     }
 
+    private List<Button> unitButtons = new List<Button>();
     private void CreateGuiElements()
     {
         UIDocument uiDocument = FindObjectOfType<UIDocument>();
 
-        if (uiDocument == null)
+        var _unitButtons = uiDocument.rootVisualElement.Q("unit-shop").Children();
+        foreach (var child in _unitButtons)
         {
-            Debug.LogError("UIDocument not found in the scene.");
-            return;
-
-        }
-        // Get the root visual element of the UI
-        VisualElement shopUiElement = uiDocument.rootVisualElement.Q("unit-shop");
-
-        foreach (var unit in tempUnitList)
-        {
-            Button button = new()
-            {
-                name = unit,
-                text = unit,
+            var button = child as Button;
+            unitButtons.Add(button);
+            button.clicked += () => {
+                // clear all tint
+                foreach(var child in unitButtons) {
+                    child.style.unityBackgroundImageTintColor = Color.white;
+                }
+                // add self tint
+                button.style.unityBackgroundImageTintColor = Color.green;
+                UnitSelected(button.text);
             };
-            button.AddToClassList("button");
-            button.clicked += () => UnitSelected(unit);
-            shopUiElement.Add(button);
         }
+
+        var teamButton = uiDocument.rootVisualElement.Q<Button>("button-team");
+        teamButton.clicked += () =>
+        {
+            teamToSpawn = teamToSpawn == "A" ? "B" : "A";
+            teamButton.text = "Team " + teamToSpawn;
+        };
     }
 
     void OnMouseDown()
     {
-        if (!isSpawningEnabled || unitBeingSpawned == null)
+        if (!isSpawningEnabled || selectedUnitType == null)
         {
             return;
         }
@@ -73,23 +70,17 @@ public class UnitShopManager : MonoBehaviour
         }
     }
 
-    public void SwitchTeam()
-    {
-        teamToSpawn = teamToSpawn == "A" ? "B" : "A";
-    }
-
     private void UnitSelected(string unit)
     {
         Debug.Log("Unit selected: " + unit);
-        unitBeingSpawned = unit;
+        selectedUnitType = "Unit" + unit;
     }
 
     private void SpawnUnit(Vector3 position)
     {
-        if (isSpawningEnabled && unitBeingSpawned != null)
+        if (isSpawningEnabled && selectedUnitType != null)
         {
-            soldierDriver.SpawnSquad(teamToSpawn, unitBeingSpawned, position);
+            soldierDriver.SpawnSquad(teamToSpawn, selectedUnitType, position);
         }
-        unitBeingSpawned = null;
     }
 }

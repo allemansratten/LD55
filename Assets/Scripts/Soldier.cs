@@ -51,7 +51,6 @@ public class Soldier : MonoBehaviour
         statusText.transform.SetParent(GameObject.Find("Dynamic Text Canvas").transform, false);
     }
 
-
     IEnumerator StartShooting()
     {
         while (engagedEnemy != null)

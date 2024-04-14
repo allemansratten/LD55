@@ -1,10 +1,16 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Button.uss?fileID=7433441132597879392&amp;guid=221373136948cb14596d14ab4d9b8429&amp;type=3#Button" />
     <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;">
-        <ui:VisualElement name="sidebar" picking-mode="Ignore" style="flex-grow: 1; width: 177px; padding-top: 10%; padding-bottom: 10%; padding-right: 1%; padding-left: 1%; background-color: rgba(24, 24, 24, 0); max-width: 15%;">
-            <ui:Button text="Start battle" parse-escape-sequences="true" display-tooltip-when-elided="true" name="button-start" class="button" style="width: 120px; height: 30px;" />
-            <ui:Button text="Team" parse-escape-sequences="true" display-tooltip-when-elided="true" name="button-team" class="button" style="white-space: normal; width: 120px; height: 30px;" />
+        <ui:VisualElement style="flex-grow: 0; align-self: stretch; max-height: none; flex-direction: row; height: 60px; top: auto; position: absolute; bottom: 0;">
+            <ui:VisualElement name="sidebar" picking-mode="Ignore" style="flex-grow: 1; width: 140px; padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0; background-color: rgba(24, 24, 24, 0); max-width: none; justify-content: flex-start; flex-direction: column; flex-wrap: nowrap; margin-left: -10px;">
+                <ui:Button text="Start battle" parse-escape-sequences="true" display-tooltip-when-elided="true" name="button-start" enable-rich-text="true" class="button" style="width: 120px; height: 30px;" />
+                <ui:Button text="Team A" parse-escape-sequences="true" display-tooltip-when-elided="true" name="button-team" class="button" style="white-space: normal; width: 120px; height: 30px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="unit-shop" style="flex-grow: 1; flex-direction: row;">
+                <ui:Button text="Basic" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" style="height: auto; background-image: url(&quot;project://database/Assets/UI/basic.jpg?fileID=2800000&amp;guid=7f1a07c4dca6c9ed2baccaa23a0041c7&amp;type=3#basic&quot;); -unity-background-scale-mode: scale-and-crop;" />
+                <ui:Button text="Archer" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" style="height: auto; background-image: url(&quot;project://database/Assets/UI/archer.jpg?fileID=2800000&amp;guid=6007769080cfe956397eaf3256905ae7&amp;type=3#archer&quot;); -unity-background-scale-mode: scale-and-crop; -unity-background-image-tint-color: rgb(255, 255, 255);" />
+                <ui:Button text="Mage" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" style="height: auto; background-image: url(&quot;project://database/Assets/UI/mage.jpg?fileID=2800000&amp;guid=fc962a5b4b7b558869500e4c1741d281&amp;type=3#mage&quot;); -unity-background-scale-mode: scale-and-crop;" />
+            </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="unit-shop" style="flex-grow: 0; align-self: stretch; max-height: 20%; flex-direction: row;" />
     </ui:VisualElement>
 </ui:UXML>
