@@ -149,6 +149,7 @@ public class Soldier : MonoBehaviour
     public void Hurt(float damage)
     {
         health -= damage;
+        animator.SetTrigger("hit");
         if (health <= 0)
         {
             Destroy(gameObject);
@@ -228,6 +229,7 @@ public class Soldier : MonoBehaviour
         if (min_dist != null && min_dist < engageDistance)
         {
             engagedEnemy = min_soldier;
+
             navMeshAgent.isStopped = true;
 
             StartCoroutine(nameof(StartShooting));
