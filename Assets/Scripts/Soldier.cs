@@ -14,6 +14,11 @@ public class Soldier : MonoBehaviour
 
     public HatType hatType = HatType.NoHat;
 
+    Animator animator;
+    bool isMoving;
+    Rigidbody soldierRigidbody;
+    Vector3 velocity;
+
     // Values to be overridden in the editor for different prefabs
     public float engageDistance = 25;
     public float projectileSpeed = 10;
@@ -23,73 +28,29 @@ public class Soldier : MonoBehaviour
     public Material outlinerMaterial;
     public Material teamAMaterial;
     public Material teamBMaterial;
+    public float pathingCooldown = 0;
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
 
-        StartCoroutine(nameof(FindNewEnemy));
+
+        animator = GetComponent<Animator>();
+        soldierRigidbody = GetComponent<Rigidbody>();
+
     }
 
-    IEnumerator FindNewEnemy()
-    {
-        while (true)
-        {
-            if (engagedEnemy == null)
-            {
-                var my_pos = GetComponent<Transform>().position;
-                var soldiers = FindObjectsOfType<Soldier>();
-
-                float? min_dist = null;
-                // YOLO
-#pragma warning disable CS8632
-                Soldier? min_soldier = null;
-
-                foreach (var soldier in soldiers)
-                {
-                    // skip our team
-                    if (soldier.team == team)
-                    {
-                        continue;
-                    }
-
-                    var soldier_pos = soldier.GetComponent<Transform>().position;
-                    var soldier_dist = Vector3.Distance(my_pos, soldier_pos);
-                    if (min_dist is null || soldier_dist < min_dist)
-                    {
-                        min_dist = soldier_dist;
-                        min_soldier = soldier;
-                    }
-                }
-
-                // repeatedly find nearest soldier, if it exists
-                if (min_dist != null && min_dist < engageDistance)
-                {
-                    engagedEnemy = min_soldier;
-                    navMeshAgent.isStopped = true;
-                    StartCoroutine(nameof(StartShooting));
-                }
-                else if (min_soldier != null)
-                {
-                    navMeshAgent.destination = min_soldier.GetComponent<Transform>().position;
-                    navMeshAgent.isStopped = false;
-                    Debug.Log(min_dist);
-
-                }
-            }
-
-            // repeat every second
-            yield return new WaitForSeconds(1.0f);
-        }
-    }
 
     IEnumerator StartShooting()
     {
         while (engagedEnemy != null)
         {
+            animator.SetTrigger("Shoot");
+
             var newPos = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
             var towardsEnemy = (engagedEnemy.transform.position - transform.position).normalized;
             GameObject projectile = Instantiate(projectilePrefab, newPos, Quaternion.LookRotation(towardsEnemy));
+
 
             projectile.GetComponent<Rigidbody>().velocity = towardsEnemy * projectileSpeed;
             projectile.GetComponent<Projectile>().team = team;
@@ -97,6 +58,7 @@ public class Soldier : MonoBehaviour
 
             // fire every second
             yield return new WaitForSeconds(1.0f + Random.value);
+
         }
     }
 
@@ -134,4 +96,64 @@ public class Soldier : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void Update()
+
+    {
+        pathingCooldown -= Time.deltaTime;
+        if (pathingCooldown > 0)
+        {
+            return;
+        }
+        if (engagedEnemy == null)
+        {
+            var my_pos = GetComponent<Transform>().position;
+            var soldiers = FindObjectsOfType<Soldier>();
+
+            float? min_dist = null;
+            // YOLO
+#pragma warning disable CS8632
+            Soldier? min_soldier = null;
+
+            foreach (var soldier in soldiers)
+            {
+                // skip our team
+                if (soldier.team == team)
+                {
+                    continue;
+                }
+
+                var soldier_pos = soldier.GetComponent<Transform>().position;
+                var soldier_dist = Vector3.Distance(my_pos, soldier_pos);
+                if (min_dist is null || soldier_dist < min_dist)
+                {
+                    min_dist = soldier_dist;
+                    min_soldier = soldier;
+                }
+            }
+
+            // repeatedly find nearest soldier, if it exists
+            if (min_dist != null && min_dist < engageDistance)
+            {
+                engagedEnemy = min_soldier;
+                navMeshAgent.isStopped = true;
+
+                StartCoroutine(nameof(StartShooting));
+
+                animator.SetBool("IsMoving", false);
+
+            }
+            else if (min_soldier != null)
+            {
+                navMeshAgent.destination = min_soldier.GetComponent<Transform>().position;
+                navMeshAgent.isStopped = false;
+                Debug.Log(min_dist);
+                animator.SetBool("IsMoving", true);
+
+            }
+        }
+
+        // repeat every second
+        pathingCooldown = 1;
+    }
+
 }
