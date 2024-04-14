@@ -16,12 +16,16 @@ public class Soldier : MonoBehaviour
     public HatType hatType = HatType.NoHat;
 
     Animator animator;
-    bool isMoving;
     Rigidbody soldierRigidbody;
+
     Vector3 velocity;
     public List<StatusEffect> statusEffects = new List<StatusEffect>();
     TextMeshProUGUI statusText;
     public float pathingCooldown = 0;
+    float previousRotation;
+    float previousAngularVelocity;
+    float smoothingValue = 0.1f;
+
 
     // Values to be overridden in the editor for different prefabs
     public float engageDistance = 25;
@@ -37,6 +41,8 @@ public class Soldier : MonoBehaviour
     // variables modifiable by status effects
     private Modifiable<float> speed = new(float.NaN);  // dummy value, overridden in Start()
     private Modifiable<float> shotCooldown = new(1.0f);
+
+
 
     void Start()
     {
@@ -112,6 +118,32 @@ public class Soldier : MonoBehaviour
 
     public void Update()
     {
+        //predava info animatoru, navMeshAgent neumi angular velocity, pocitam ho sam.
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+        // Calculate current rotation
+        float currentRotation = soldierRigidbody.rotation.eulerAngles.y;
+
+        // Calculate rotation change from previous frame
+        float rotationChange = currentRotation - previousRotation;
+
+
+        float angleInRadians = rotationChange * Mathf.Deg2Rad;
+
+        // Calculate angular velocity in radians per second
+        float angularVelocity = angleInRadians / Time.deltaTime;
+
+        animator.SetFloat("rotation", angularVelocity* smoothingValue + previousAngularVelocity * (1-smoothingValue));
+        // Update previousRotation for next frame
+        previousAngularVelocity = angularVelocity * smoothingValue + previousAngularVelocity * (1 - smoothingValue);
+        previousRotation = currentRotation;
+
+        // Now you have the angular velocity in radians per second
+        Debug.Log("Angular Velocity (Radians/s): " + previousAngularVelocity + " " + currentRotation);
+
+
+
+
+
         pathingCooldown -= Time.deltaTime;
         if (pathingCooldown <= 0)
         {
@@ -151,6 +183,7 @@ public class Soldier : MonoBehaviour
             {
                 min_dist = soldier_dist;
                 min_soldier = soldier;
+
             }
         }
 

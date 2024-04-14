@@ -21,10 +21,10 @@ public class SoldierDriver : MonoBehaviour
     void SpawnDebugEnemies()
     {
         Spawn("B", "UnitBasic", new Vector3(3, 0, 3));
-        Spawn("B", "UnitArcher", new Vector3(4, 0, 3));
-        Spawn("B", "UnitArcher", new Vector3(5, 0, 3));
-        Spawn("B", "UnitBasic", new Vector3(6, 0, 3));
-        Spawn("B", "UnitBasic", new Vector3(7, 0, 3));
+        //Spawn("B", "UnitArcher", new Vector3(4, 0, 3));
+        //Spawn("B", "UnitArcher", new Vector3(5, 0, 3));
+        //Spawn("B", "UnitBasic", new Vector3(6, 0, 3));
+        //Spawn("B", "UnitBasic", new Vector3(7, 0, 3));
     }
 
     public void Spawn(string team, string unitType, Vector3 position)
