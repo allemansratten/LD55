@@ -3,6 +3,9 @@ using UnityEngine.EventSystems;
 
 public class SoldierDriver : MonoBehaviour
 {
+    private bool isBattleStarted = false;
+    public bool IsBattleStarted { get => isBattleStarted; }
+
     void Start()
     {
         EventManager.OnBattleStart += () =>
@@ -10,6 +13,7 @@ public class SoldierDriver : MonoBehaviour
             foreach (var soldier in FindObjectsOfType<Soldier>())
             {
                 soldier.enabled = true;
+                isBattleStarted = true;
             }
         };
     }
