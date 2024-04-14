@@ -43,8 +43,6 @@ public class Soldier : MonoBehaviour
     private Modifiable<float> speed = new(float.NaN);  // dummy value, overridden in Start()
     private Modifiable<float> shotCooldown = new(1.0f);
 
-
-
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -89,9 +87,8 @@ public class Soldier : MonoBehaviour
     {
         this.hatType = hatType;
 
-        GameObject child = transform.Find("Hat").gameObject;
-        MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
-        meshRenderer.material = Resources.Load<Material>("Hats/" + hatType.ToString());
+        SkinnedMeshRenderer meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+
     }
 
     public void SetTeam(string team)
@@ -120,7 +117,7 @@ public class Soldier : MonoBehaviour
 
     public void Update()
     {
-        if(!enabled) return;
+        if (!enabled) return;
 
         //predava info animatoru, navMeshAgent neumi angular velocity, pocitam ho sam.
         animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
@@ -136,7 +133,7 @@ public class Soldier : MonoBehaviour
         // Calculate angular velocity in radians per second
         float angularVelocity = angleInRadians / Time.deltaTime;
 
-        animator.SetFloat("rotation", angularVelocity* smoothingValue + previousAngularVelocity * (1-smoothingValue));
+        animator.SetFloat("rotation", angularVelocity * smoothingValue + previousAngularVelocity * (1 - smoothingValue));
         // Update previousRotation for next frame
         previousAngularVelocity = angularVelocity * smoothingValue + previousAngularVelocity * (1 - smoothingValue);
         previousRotation = currentRotation;
@@ -144,7 +141,7 @@ public class Soldier : MonoBehaviour
         // Now you have the angular velocity in radians per second
         Debug.Log("Angular Velocity (Radians/s): " + previousAngularVelocity + " " + currentRotation);
 
-        
+
         pathingCooldown -= Time.deltaTime;
         if (pathingCooldown <= 0)
         {
