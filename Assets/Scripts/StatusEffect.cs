@@ -35,3 +35,31 @@ public class StatusEffect
         return true;
     }
 }
+
+// A value that can be modified and reset to its base value.
+// Meant to be modified by status effects.
+public class Modifiable<T>
+{
+    public T BaseValue
+    {
+        get;
+        set;
+    }
+
+    public T Value
+    {
+        get;
+        set;
+    }
+
+    public Modifiable(T baseValue)
+    {
+        BaseValue = baseValue;
+        Value = baseValue;
+    }
+
+    public void Reset()
+    {
+        Value = BaseValue;
+    }
+}

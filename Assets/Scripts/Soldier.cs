@@ -21,7 +21,6 @@ public class Soldier : MonoBehaviour
     Vector3 velocity;
     public List<StatusEffect> statusEffects = new List<StatusEffect>();
     TextMeshProUGUI statusText;
-
     public float pathingCooldown = 0;
 
     // Values to be overridden in the editor for different prefabs
@@ -35,16 +34,20 @@ public class Soldier : MonoBehaviour
     public Material teamBMaterial;
     public TextMeshProUGUI statusTextPrefab;
 
+    // variables modifiable by status effects
+    private Modifiable<float> speed = new(float.NaN);  // dummy value, overridden in Start()
+    private Modifiable<float> shotCooldown = new(1.0f);
+
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-
+        // set desired speed based on nav mesh agent speed
+        speed.BaseValue = navMeshAgent.speed;
 
         animator = GetComponent<Animator>();
         soldierRigidbody = GetComponent<Rigidbody>();
 
-        statusEffects.Add(new StatusEffect("Hello", 0.5f));
-        statusEffects.Add(new StatusEffect("World :)", 1.0f));
+        statusEffects.Add(new StatusEffect("Slow", 1.0f));
 
         // create status text and add it to canvas
         statusText = Instantiate(statusTextPrefab);
@@ -67,7 +70,7 @@ public class Soldier : MonoBehaviour
             projectile.GetComponent<Projectile>().damage = projectileDamage;
 
             // fire every second
-            yield return new WaitForSeconds(1.0f + Random.value);
+            yield return new WaitForSeconds((1.0f + Random.value) * shotCooldown.Value);
 
         }
     }
@@ -173,13 +176,26 @@ public class Soldier : MonoBehaviour
 
     void UpdateStatusEffects()
     {
+        speed.Reset();
+        shotCooldown.Reset();
+
         // Go backwards so we can remove elements without affecting the loop
         for (int i = statusEffects.Count - 1; i >= 0; i--)
         {
             if (!statusEffects[i].Update(Time.deltaTime))
             {
                 statusEffects.RemoveAt(i);
+                continue;
+            }
+
+            var statusEffect = statusEffects[i];
+            if (statusEffect.Name == "Slow")
+            {
+                speed.Value *= 0.5f;
+                shotCooldown.Value *= 2.0f;
             }
         }
+
+        navMeshAgent.speed = speed.Value;
     }
 }
