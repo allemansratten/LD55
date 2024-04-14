@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Blue
+  m_Name: Brown
   m_Shader: {fileID: -6465566751694194690, guid: 0eb3ac3c3b1f4774da228b1f32c9271a,
     type: 3}
   m_Parent: {fileID: 0}
@@ -101,13 +101,11 @@ Material:
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
     - _Flash_Intensity: 0
-    - _Flashing: 1
-    - _Flashing_Intensity: -0.15
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Max: 1
-    - _Metallic: 0.427
+    - _Metallic: 0
     - _Min: 0.3
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -115,7 +113,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Shades: 0.49
-    - _Smoothness: 0.53
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -124,13 +122,13 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0, g: 0.50179243, b: 1, a: 1}
-    - _Color: {r: 0, g: 0.50179243, b: 1, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.4245283, g: 0.22497067, b: 0.046057325, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Flash_Color: {r: 0.5849056, g: 0.03586687, b: 0.03586687, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &1575568795206018018
+--- !u!114 &2267080675854576677
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
