@@ -61,20 +61,24 @@ public class Soldier : MonoBehaviour
         statusText.GetComponent<StatusText>().SetSoldier(this);
     }
 
+    // Can be overridden in subclass
+    void Attack(Soldier enemy)
+    {
+        var newPos = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
+        var towardsEnemy = (engagedEnemy.transform.position - transform.position).normalized;
+        GameObject projectile = Instantiate(projectilePrefab, newPos, Quaternion.LookRotation(towardsEnemy));
+
+        projectile.GetComponent<Rigidbody>().velocity = towardsEnemy * projectileSpeed;
+        projectile.GetComponent<Projectile>().team = team;
+        projectile.GetComponent<Projectile>().damage = projectileDamage;
+    }
+
     IEnumerator StartShooting()
     {
         while (engagedEnemy != null)
         {
             animator.SetTrigger("Shoot");
-
-            var newPos = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
-            var towardsEnemy = (engagedEnemy.transform.position - transform.position).normalized;
-            GameObject projectile = Instantiate(projectilePrefab, newPos, Quaternion.LookRotation(towardsEnemy));
-
-
-            projectile.GetComponent<Rigidbody>().velocity = towardsEnemy * projectileSpeed;
-            projectile.GetComponent<Projectile>().team = team;
-            projectile.GetComponent<Projectile>().damage = projectileDamage;
+            Attack(engagedEnemy);
 
             // fire every second
             yield return new WaitForSeconds((1.0f + Random.value) * shotCooldown.Value);
@@ -82,6 +86,8 @@ public class Soldier : MonoBehaviour
         }
     }
 
+    // YOLO
+#pragma warning disable CS8632
     protected Soldier? engagedEnemy = null;
 
     public void SetHat(HatType hatType)
@@ -141,7 +147,7 @@ public class Soldier : MonoBehaviour
         previousRotation = currentRotation;
 
         // Now you have the angular velocity in radians per second
-        Debug.Log("Angular Velocity (Radians/s): " + previousAngularVelocity + " " + currentRotation);
+        // Debug.Log("Angular Velocity (Radians/s): " + previousAngularVelocity + " " + currentRotation);
 
 
         pathingCooldown -= Time.deltaTime;
