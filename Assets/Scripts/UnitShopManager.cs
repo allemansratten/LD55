@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 public class UnitShopManager : MonoBehaviour
@@ -62,6 +63,10 @@ public class UnitShopManager : MonoBehaviour
             return;
         }
 
+        // counterintuitively, this needs to be false in order to be over game object
+        if(EventSystem.current.IsPointerOverGameObject()) {
+            return;
+        }
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out RaycastHit hit, 100))
