@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,6 +19,10 @@ public class Soldier : MonoBehaviour
     bool isMoving;
     Rigidbody soldierRigidbody;
     Vector3 velocity;
+    List<StatusEffect> statusEffects = new List<StatusEffect>();
+    TextMeshProUGUI statusText;
+
+    public float pathingCooldown = 0;
 
     // Values to be overridden in the editor for different prefabs
     public float engageDistance = 25;
@@ -28,7 +33,7 @@ public class Soldier : MonoBehaviour
     public Material outlinerMaterial;
     public Material teamAMaterial;
     public Material teamBMaterial;
-    public float pathingCooldown = 0;
+    public TextMeshProUGUI statusTextPrefab;
 
     void Start()
     {
@@ -38,6 +43,12 @@ public class Soldier : MonoBehaviour
         animator = GetComponent<Animator>();
         soldierRigidbody = GetComponent<Rigidbody>();
 
+        statusEffects.Add(new StatusEffect("Hello", 0.5f));
+        statusEffects.Add(new StatusEffect("World :)", 1.0f));
+
+        // create status text and add it to canvas
+        statusText = Instantiate(statusTextPrefab, statusTextPrefab.transform.position, Quaternion.identity);
+        statusText.transform.SetParent(GameObject.Find("Dynamic Text Canvas").transform, false);
     }
 
 
@@ -96,64 +107,90 @@ public class Soldier : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void Update()
 
+    public void Update()
     {
         pathingCooldown -= Time.deltaTime;
-        if (pathingCooldown > 0)
+        if (pathingCooldown <= 0)
+        {
+            UpdatePathing();
+            // repeat every second
+            pathingCooldown = 1;
+        }
+
+        UpdateStatusEffects();
+    }
+
+    void UpdatePathing()
+    {
+        if (engagedEnemy != null)
         {
             return;
         }
-        if (engagedEnemy == null)
-        {
-            var my_pos = GetComponent<Transform>().position;
-            var soldiers = FindObjectsOfType<Soldier>();
+        var my_pos = GetComponent<Transform>().position;
+        var soldiers = FindObjectsOfType<Soldier>();
 
-            float? min_dist = null;
-            // YOLO
+        float? min_dist = null;
+        // YOLO
 #pragma warning disable CS8632
-            Soldier? min_soldier = null;
+        Soldier? min_soldier = null;
 
-            foreach (var soldier in soldiers)
+        foreach (var soldier in soldiers)
+        {
+            // skip our team
+            if (soldier.team == team)
             {
-                // skip our team
-                if (soldier.team == team)
-                {
-                    continue;
-                }
-
-                var soldier_pos = soldier.GetComponent<Transform>().position;
-                var soldier_dist = Vector3.Distance(my_pos, soldier_pos);
-                if (min_dist is null || soldier_dist < min_dist)
-                {
-                    min_dist = soldier_dist;
-                    min_soldier = soldier;
-                }
+                continue;
             }
 
-            // repeatedly find nearest soldier, if it exists
-            if (min_dist != null && min_dist < engageDistance)
+            var soldier_pos = soldier.GetComponent<Transform>().position;
+            var soldier_dist = Vector3.Distance(my_pos, soldier_pos);
+            if (min_dist is null || soldier_dist < min_dist)
             {
-                engagedEnemy = min_soldier;
-                navMeshAgent.isStopped = true;
-
-                StartCoroutine(nameof(StartShooting));
-
-                animator.SetBool("IsMoving", false);
-
-            }
-            else if (min_soldier != null)
-            {
-                navMeshAgent.destination = min_soldier.GetComponent<Transform>().position;
-                navMeshAgent.isStopped = false;
-                Debug.Log(min_dist);
-                animator.SetBool("IsMoving", true);
-
+                min_dist = soldier_dist;
+                min_soldier = soldier;
             }
         }
 
-        // repeat every second
-        pathingCooldown = 1;
+        // repeatedly find nearest soldier, if it exists
+        if (min_dist != null && min_dist < engageDistance)
+        {
+            engagedEnemy = min_soldier;
+            navMeshAgent.isStopped = true;
+
+            StartCoroutine(nameof(StartShooting));
+
+            animator.SetBool("IsMoving", false);
+
+        }
+        else if (min_soldier != null)
+        {
+            navMeshAgent.destination = min_soldier.GetComponent<Transform>().position;
+            navMeshAgent.isStopped = false;
+            animator.SetBool("IsMoving", true);
+
+        }
     }
 
+    void UpdateStatusEffects()
+    {
+        string statusTextString = "";
+        foreach (var statusEffect in statusEffects)
+        {
+            statusTextString += statusEffect.Name + "\n";
+        }
+
+        // Go backwards so we can remove elements without affecting the loop
+        for (int i = statusEffects.Count - 1; i >= 0; i--)
+        {
+            if (!statusEffects[i].Update(Time.deltaTime))
+            {
+                statusEffects.RemoveAt(i);
+            }
+        }
+
+        // position status text at my position
+        statusText.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 0, 0));
+        statusText.text = statusTextString;
+    }
 }

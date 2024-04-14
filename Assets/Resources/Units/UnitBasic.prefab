@@ -289,6 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   hatType: 0
+  pathingCooldown: 0
   engageDistance: 5
   projectileSpeed: 10
   projectileDamage: 25
@@ -298,6 +299,8 @@ MonoBehaviour:
   outlinerMaterial: {fileID: 2100000, guid: 00c46ab89a9d478408a7f321142ea2ca, type: 2}
   teamAMaterial: {fileID: 2100000, guid: 3f93eaf4bfac4308c85fadfd798c6dcb, type: 2}
   teamBMaterial: {fileID: 2100000, guid: 81008576d0c020ea5ab55a2355d3f9c8, type: 2}
+  statusTextPrefab: {fileID: 1120185822918502219, guid: e62cbd05430094e829024c9735ce7c57,
+    type: 3}
 --- !u!95 &-1957495205850405055
 Animator:
   serializedVersion: 5
