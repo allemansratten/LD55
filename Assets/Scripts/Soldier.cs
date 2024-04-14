@@ -17,6 +17,7 @@ public class Soldier : MonoBehaviour
 
     Animator animator;
     Rigidbody soldierRigidbody;
+    SoldierDriver soldierDriver;
 
     Vector3 velocity;
     // public so that StatusText can access it, but to add elements, use AddStatusEffect().
@@ -51,13 +52,11 @@ public class Soldier : MonoBehaviour
 
         animator = GetComponent<Animator>();
         soldierRigidbody = GetComponent<Rigidbody>();
+        soldierDriver = GameObject.Find("Game Controller").GetComponent<SoldierDriver>();
 
         // create status text and add it to canvas
         statusText = Instantiate(statusTextPrefab);
         statusText.GetComponent<StatusText>().SetSoldier(this);
-
-        // disable by default
-        enabled = false;
     }
 
     IEnumerator StartShooting()
@@ -117,7 +116,7 @@ public class Soldier : MonoBehaviour
 
     public void Update()
     {
-        if (!enabled) return;
+        if (!soldierDriver.IsBattleStarted) return;
 
         //predava info animatoru, navMeshAgent neumi angular velocity, pocitam ho sam.
         animator.SetFloat("speed", navMeshAgent.velocity.magnitude);

@@ -15,7 +15,8 @@ public class UnitShopManager : MonoBehaviour
     {
         EventManager.OnBattleStart += () =>
         {
-            isSpawningEnabled = false;
+            // Commented out to make testing easier.
+            // isSpawningEnabled = false;
         };
 
         EventManager.OnBattleEnd += () =>
@@ -37,9 +38,11 @@ public class UnitShopManager : MonoBehaviour
         {
             var button = child as Button;
             unitButtons.Add(button);
-            button.clicked += () => {
+            button.clicked += () =>
+            {
                 // clear all tint
-                foreach(var child in unitButtons) {
+                foreach (var child in unitButtons)
+                {
                     child.style.unityBackgroundImageTintColor = Color.white;
                 }
                 // add self tint
@@ -64,7 +67,8 @@ public class UnitShopManager : MonoBehaviour
         }
 
         // counterintuitively, this needs to be false in order to be over game object
-        if(EventSystem.current.IsPointerOverGameObject()) {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
             return;
         }
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

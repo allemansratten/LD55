@@ -504,7 +504,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68e262fffb53ca3209cfa428175512ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugSpawnEnemies: 0
 --- !u!1 &260851001
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +648,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.57931626, y: -0, z: -0, w: 0.8151028}
-  m_LocalPosition: {x: 0, y: 37.9, z: -14.2}
+  m_LocalPosition: {x: 0, y: 17.6, z: -9.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
