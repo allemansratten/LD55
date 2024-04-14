@@ -106,7 +106,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 52f81b79558cf7348b32686e34bd80f3, type: 2}
+      objectReference: {fileID: 9100000, guid: 39ca8240ff977f24ab0b8a0d25b1a4b0, type: 2}
     - target: {fileID: 1986397860280639848, guid: 615675ec7948e4dfbab001d8434ef097,
         type: 3}
       propertyPath: unitsPerSquad
