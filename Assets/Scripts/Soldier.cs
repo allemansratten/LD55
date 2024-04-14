@@ -40,7 +40,6 @@ public class Soldier : MonoBehaviour
 
     }
 
-
     IEnumerator StartShooting()
     {
         while (engagedEnemy != null)
@@ -146,7 +145,6 @@ public class Soldier : MonoBehaviour
             {
                 navMeshAgent.destination = min_soldier.GetComponent<Transform>().position;
                 navMeshAgent.isStopped = false;
-                Debug.Log(min_dist);
                 animator.SetBool("IsMoving", true);
 
             }
