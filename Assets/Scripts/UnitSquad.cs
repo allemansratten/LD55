@@ -14,8 +14,6 @@ public class UnitSquad : MonoBehaviour
 
     public void Start()
     {
-        var hatTypes = System.Enum.GetValues(typeof(HatType));
-        squadHat = (HatType)hatTypes.GetValue(Random.Range(0, hatTypes.Length));
         EventManager.OnBattleStart += RemoveSquadDragHandlers;
         EventManager.OnBattleEnd += AddSquadDragHandlers;
     }
@@ -31,6 +29,10 @@ public class UnitSquad : MonoBehaviour
 
     public void InitSquad(int squadSize, GameObject unitPrefab, Vector3 position, string team)
     {
+        var hatTypes = System.Enum.GetValues(typeof(HatType));
+        squadHat = (HatType)hatTypes.GetValue(Random.Range(0, hatTypes.Length));
+        Debug.Log("Squad hat: " + squadHat);
+
         for (int i = 0; i < squadSize; i++)
         {
             // TODO: calculate position based on squad size / formation

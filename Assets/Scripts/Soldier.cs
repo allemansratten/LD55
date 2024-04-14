@@ -13,7 +13,7 @@ public class Soldier : MonoBehaviour
 
     public float health;
 
-    public HatType hatType = HatType.NoHat;
+    public HatType hatType;
 
     Animator animator;
     Rigidbody soldierRigidbody;
@@ -43,6 +43,7 @@ public class Soldier : MonoBehaviour
     // variables modifiable by status effects
     private Modifiable<float> speed = new(float.NaN);  // dummy value, overridden in Start()
     private Modifiable<float> shotCooldown = new(1.0f);
+    private GameObject currentHat = null;
 
     void Start()
     {
@@ -84,10 +85,43 @@ public class Soldier : MonoBehaviour
 
     public void SetHat(HatType hatType)
     {
+        Debug.Log("Setting hat to: " + hatType);
         this.hatType = hatType;
+        Destroy(currentHat);
+        if (hatType == HatType.NoHat)
+        {
+            return;
+        }
+
+        GameObject hatPrefab = Resources.Load<GameObject>("Hats/" + hatType.ToString());
+        if (hatPrefab == null)
+        {
+            Debug.LogWarning("Hat prefab not found for hat type: " + hatType);
+            return;
+        }
 
         SkinnedMeshRenderer meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        GameObject hat = Instantiate(hatPrefab, transform);
+        hat.transform.localPosition = new Vector3(0, 0.1f, 0);
+        currentHat = hat;
+        GameObject headBone = FindBoneByName("mixamorig:Head", meshRenderer);
+        if (headBone != null)
+        {
+            hat.transform.parent = headBone.transform;
+            hat.transform.localPosition = headBone.transform.localPosition + new Vector3(0, 0.1f, 0);
+        }
+    }
 
+    private GameObject FindBoneByName(string name, SkinnedMeshRenderer skinnedMeshRenderer)
+    {
+        foreach (var bone in skinnedMeshRenderer.bones)
+        {
+            if (bone.name == name)
+            {
+                return bone.gameObject;
+            }
+        }
+        return null;
     }
 
     public void SetTeam(string team)

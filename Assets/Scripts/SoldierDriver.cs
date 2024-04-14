@@ -44,7 +44,7 @@ public class SoldierDriver : MonoBehaviour
         {
             throw new System.Exception("Spawning UnitBasic is not allowed. Use UnitMelee.");
         }
-        GameObject newGameObject = new GameObject("Squad/" + unitType);
+        GameObject newGameObject = new("Squad/" + unitType);
         UnitSquad unitSquad = newGameObject.AddComponent<UnitSquad>();
         GameObject unit = Resources.Load<GameObject>("Units/" + unitType);
         unitSquad.InitSquad(unit.GetComponent<Soldier>().unitsPerSquad, unit, position, team);
