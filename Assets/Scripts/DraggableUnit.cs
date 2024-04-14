@@ -19,7 +19,23 @@ public class UnitDragHandler : MonoBehaviour
         Vector3 mousePoint = Input.mousePosition;
         mousePoint.z = startZCoord;
         // Convert it to world points
-        return Camera.main.ScreenToWorldPoint(mousePoint);
+        return ProjectOntoGround(Camera.main.ScreenToWorldPoint(mousePoint));
+    }
+
+    public Vector3 ProjectOntoGround(Vector3 coordinates)
+    {
+        // Cast a ray from the coordinates downward
+        Ray ray = new(coordinates + Vector3.up * 1000f, Vector3.down);
+
+        // Check for intersection with the ground plane collider
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
+        {
+            return hit.point; // Return the intersection point
+        }
+        else
+        {
+            return coordinates; // If no intersection, return the original coordinates
+        }
     }
 
     /// <summary>
