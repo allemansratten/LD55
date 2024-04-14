@@ -302,3 +302,9 @@ PrefabInstance:
       addedObject: {fileID: 5518595821097238973}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 615675ec7948e4dfbab001d8434ef097, type: 3}
+--- !u!4 &7538213343850832627 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5524083549676988532, guid: 615675ec7948e4dfbab001d8434ef097,
+    type: 3}
+  m_PrefabInstance: {fileID: 2608817426682727047}
+  m_PrefabAsset: {fileID: 0}

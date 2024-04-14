@@ -418,3 +418,9 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &5524083549676988532 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dfdbcb652711a42fd911c22ba2f8ee3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5414388627040767903}
+  m_PrefabAsset: {fileID: 0}
