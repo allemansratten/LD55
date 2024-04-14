@@ -2,8 +2,8 @@
     <Style src="project://database/Assets/UI/Button.uss?fileID=7433441132597879392&amp;guid=221373136948cb14596d14ab4d9b8429&amp;type=3#Button" />
     <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;">
         <ui:VisualElement name="sidebar" picking-mode="Ignore" style="flex-grow: 1; width: 177px; padding-top: 10%; padding-bottom: 10%; padding-right: 1%; padding-left: 1%; background-color: rgba(24, 24, 24, 0); max-width: 15%;">
-            <ui:Button text="Start battle" parse-escape-sequences="true" display-tooltip-when-elided="true" name="button-start" class="button" />
-            <ui:Button text="Team" parse-escape-sequences="true" display-tooltip-when-elided="true" name="button-team" class="button" style="white-space: normal;" />
+            <ui:Button text="Start battle" parse-escape-sequences="true" display-tooltip-when-elided="true" name="button-start" class="button" style="width: 120px; height: 30px;" />
+            <ui:Button text="Team" parse-escape-sequences="true" display-tooltip-when-elided="true" name="button-team" class="button" style="white-space: normal; width: 120px; height: 30px;" />
         </ui:VisualElement>
         <ui:VisualElement name="unit-shop" style="flex-grow: 0; align-self: stretch; max-height: 20%; flex-direction: row;" />
     </ui:VisualElement>
