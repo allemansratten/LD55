@@ -3,18 +3,13 @@ using UnityEngine.EventSystems;
 
 public class SoldierDriver : MonoBehaviour
 {
-    public bool debugSpawnEnemies;
-
     void Start()
     {
-        if (debugSpawnEnemies)
-        {
-            SpawnDebugEnemies();
-        }
-
         EventManager.OnBattleStart += () =>
         {
-            SpawnDebugEnemies();
+            foreach(var soldier in FindObjectsOfType<Soldier>()) {
+                soldier.enabled = true;
+            }
         };
     }
 

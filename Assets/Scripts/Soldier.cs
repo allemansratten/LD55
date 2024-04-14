@@ -58,6 +58,9 @@ public class Soldier : MonoBehaviour
         // create status text and add it to canvas
         statusText = Instantiate(statusTextPrefab);
         statusText.GetComponent<StatusText>().SetSoldier(this);
+
+        // disable by default
+        enabled = false;
     }
 
     IEnumerator StartShooting()
@@ -118,6 +121,8 @@ public class Soldier : MonoBehaviour
 
     public void Update()
     {
+        if(!enabled) return;
+
         //predava info animatoru, navMeshAgent neumi angular velocity, pocitam ho sam.
         animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
         // Calculate current rotation
@@ -140,10 +145,7 @@ public class Soldier : MonoBehaviour
         // Now you have the angular velocity in radians per second
         Debug.Log("Angular Velocity (Radians/s): " + previousAngularVelocity + " " + currentRotation);
 
-
-
-
-
+        
         pathingCooldown -= Time.deltaTime;
         if (pathingCooldown <= 0)
         {
