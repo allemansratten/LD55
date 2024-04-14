@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class UI : MonoBehaviour
 {
+    private bool isBattleStarted = false;
+
     private void OnEnable()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
@@ -14,8 +17,16 @@ public class UI : MonoBehaviour
 
         buttonStart.clicked += () =>
         {
-            buttonStart.text = "TODO: reset?";
-            EventManager.BattleStart();
-        }; 
+            if (!isBattleStarted)
+            {
+                buttonStart.text = "Reset";
+                EventManager.BattleStart();
+                isBattleStarted = true;
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        };
     }
 }
