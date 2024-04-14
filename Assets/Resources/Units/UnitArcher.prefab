@@ -118,5 +118,41 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 387083515302234867, guid: 615675ec7948e4dfbab001d8434ef097, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5179891727131161294, guid: 615675ec7948e4dfbab001d8434ef097,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5931881705363624729}
   m_SourcePrefab: {fileID: 100100000, guid: 615675ec7948e4dfbab001d8434ef097, type: 3}
+--- !u!1 &3282693577398618828 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5179891727131161294, guid: 615675ec7948e4dfbab001d8434ef097,
+    type: 3}
+  m_PrefabInstance: {fileID: 7668737904913299458}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5931881705363624729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3282693577398618828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0560640dc81547669e7ea18807df473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  hatType: 0
+  pathingCooldown: 0
+  engageDistance: 25
+  projectileSpeed: 30
+  projectileDamage: 10
+  unitsPerSquad: 3
+  projectilePrefab: {fileID: 3031435990657543594, guid: 732c0c50511e64a0883253d544963e1f,
+    type: 3}
+  outlinerMaterial: {fileID: 2100000, guid: 00c46ab89a9d478408a7f321142ea2ca, type: 2}
+  teamAMaterial: {fileID: 2100000, guid: 3f93eaf4bfac4308c85fadfd798c6dcb, type: 2}
+  teamBMaterial: {fileID: 2100000, guid: 81008576d0c020ea5ab55a2355d3f9c8, type: 2}
+  statusTextPrefab: {fileID: 1120185822918502219, guid: e62cbd05430094e829024c9735ce7c57,
+    type: 3}
