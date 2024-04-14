@@ -41,8 +41,8 @@ public class Soldier : MonoBehaviour
     public TextMeshProUGUI statusTextPrefab;
 
     // variables modifiable by status effects
-    private Modifiable<float> speed = new(float.NaN);  // dummy value, overridden in Start()
-    private Modifiable<float> shotCooldown = new(1.0f);
+    protected Modifiable<float> speed = new(float.NaN);  // dummy value, overridden in Start()
+    protected Modifiable<float> shotCooldown = new(1.0f);
     private GameObject currentHat = null;
 
     void Start()
@@ -89,7 +89,7 @@ public class Soldier : MonoBehaviour
 #pragma warning disable CS8632
     protected Soldier? engagedEnemy = null;
 
-    public void SetHat(HatType hatType)
+    public virtual void SetHat(HatType hatType)
     {
         Debug.Log("Setting hat to: " + hatType);
         this.hatType = hatType;
