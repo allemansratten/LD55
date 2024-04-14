@@ -19,6 +19,7 @@ public class Soldier : MonoBehaviour
     bool isMoving;
     Rigidbody soldierRigidbody;
     Vector3 velocity;
+    // public so that StatusText can access it, but to add elements, use AddStatusEffect().
     public List<StatusEffect> statusEffects = new List<StatusEffect>();
     TextMeshProUGUI statusText;
     public float pathingCooldown = 0;
@@ -46,8 +47,6 @@ public class Soldier : MonoBehaviour
 
         animator = GetComponent<Animator>();
         soldierRigidbody = GetComponent<Rigidbody>();
-
-        statusEffects.Add(new StatusEffect("Slow", 1.0f));
 
         // create status text and add it to canvas
         statusText = Instantiate(statusTextPrefab);
@@ -197,5 +196,19 @@ public class Soldier : MonoBehaviour
         }
 
         navMeshAgent.speed = speed.Value;
+    }
+
+    public void AddStatusEffect(StatusEffect statusEffect)
+    {
+        // if a status effect with the same name is already applied, reset its duration
+        foreach (var effect in statusEffects)
+        {
+            if (effect.Name == statusEffect.Name)
+            {
+                effect.Refresh(statusEffect.MaxDuration);
+                return;
+            }
+        }
+        statusEffects.Add(statusEffect);
     }
 }

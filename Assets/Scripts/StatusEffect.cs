@@ -34,6 +34,11 @@ public class StatusEffect
         }
         return true;
     }
+
+    public void Refresh(float newMaxDuration = -1)
+    {
+        Duration = newMaxDuration == -1 ? MaxDuration : newMaxDuration;
+    }
 }
 
 // A value that can be modified and reset to its base value.

@@ -10,6 +10,8 @@ public class Projectile : MonoBehaviour
     public float damage = 25;
     // If >0, do AoE damage on impact instead of damaging single units.
     public float areaOfEffect = 0;
+    // No slow is applied if slowDuration = 0;
+    public float slowDuration = 0;
 
     public GameObject aoeDamageIndicatorPrefab;
 
@@ -28,7 +30,7 @@ public class Projectile : MonoBehaviour
         {
             if (areaOfEffect == 0)
             {
-                soldier.Hurt(damage);
+                DamageSoldier(soldier);
             }
             Land();
         }
@@ -52,7 +54,7 @@ public class Projectile : MonoBehaviour
             var soldier = hitCollider.gameObject.GetComponent<Soldier>();
             if (soldier != null && soldier.Team != team)
             {
-                soldier.Hurt(damage);
+                DamageSoldier(soldier);
                 // also knock back (TODO: only for earth)
                 var direction = (soldier.transform.position - position).normalized;
                 soldier.gameObject.GetComponent<Rigidbody>().AddForce(direction * 300, ForceMode.Impulse);
@@ -64,5 +66,14 @@ public class Projectile : MonoBehaviour
         ring.transform.localScale = new Vector3(areaOfEffect, 0.1f, areaOfEffect);
         ring.GetComponent<Collider>().enabled = false;
         Destroy(ring, 0.3f);
+    }
+
+    void DamageSoldier(Soldier soldier)
+    {
+        soldier.Hurt(damage);
+        if (slowDuration > 0)
+        {
+            soldier.AddStatusEffect(new StatusEffect("Slow", slowDuration));
+        }
     }
 }

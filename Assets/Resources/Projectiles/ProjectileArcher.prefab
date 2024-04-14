@@ -78,6 +78,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProjectileArcher
       objectReference: {fileID: 0}
+    - target: {fileID: 4129490469483635168, guid: 0bbe6ef442984d6ad9d168da2397f008,
+        type: 3}
+      propertyPath: slowDuration
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 799661197412639256, guid: 0bbe6ef442984d6ad9d168da2397f008, type: 3}
     - {fileID: 5540869813243158461, guid: 0bbe6ef442984d6ad9d168da2397f008, type: 3}
