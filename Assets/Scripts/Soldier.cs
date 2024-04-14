@@ -62,10 +62,10 @@ public class Soldier : MonoBehaviour
     }
 
     // Can be overridden in subclass
-    void Attack(Soldier enemy)
+    protected virtual void Attack(Soldier enemy)
     {
         var newPos = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
-        var towardsEnemy = (engagedEnemy.transform.position - transform.position).normalized;
+        var towardsEnemy = (enemy.transform.position - transform.position).normalized;
         GameObject projectile = Instantiate(projectilePrefab, newPos, Quaternion.LookRotation(towardsEnemy));
 
         projectile.GetComponent<Rigidbody>().velocity = towardsEnemy * projectileSpeed;
