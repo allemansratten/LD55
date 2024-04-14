@@ -19,7 +19,7 @@ public class Soldier : MonoBehaviour
     bool isMoving;
     Rigidbody soldierRigidbody;
     Vector3 velocity;
-    List<StatusEffect> statusEffects = new List<StatusEffect>();
+    public List<StatusEffect> statusEffects = new List<StatusEffect>();
     TextMeshProUGUI statusText;
 
     public float pathingCooldown = 0;
@@ -47,8 +47,8 @@ public class Soldier : MonoBehaviour
         statusEffects.Add(new StatusEffect("World :)", 1.0f));
 
         // create status text and add it to canvas
-        statusText = Instantiate(statusTextPrefab, statusTextPrefab.transform.position, Quaternion.identity);
-        statusText.transform.SetParent(GameObject.Find("Dynamic Text Canvas").transform, false);
+        statusText = Instantiate(statusTextPrefab);
+        statusText.GetComponent<StatusText>().SetSoldier(this);
     }
 
     IEnumerator StartShooting()
@@ -173,12 +173,6 @@ public class Soldier : MonoBehaviour
 
     void UpdateStatusEffects()
     {
-        string statusTextString = "";
-        foreach (var statusEffect in statusEffects)
-        {
-            statusTextString += statusEffect.Name + "\n";
-        }
-
         // Go backwards so we can remove elements without affecting the loop
         for (int i = statusEffects.Count - 1; i >= 0; i--)
         {
@@ -187,9 +181,5 @@ public class Soldier : MonoBehaviour
                 statusEffects.RemoveAt(i);
             }
         }
-
-        // position status text at my position
-        statusText.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 0, 0));
-        statusText.text = statusTextString;
     }
 }
