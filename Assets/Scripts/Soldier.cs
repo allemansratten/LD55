@@ -147,7 +147,6 @@ public class Soldier : MonoBehaviour
         previousRotation = currentRotation;
 
         // Now you have the angular velocity in radians per second
-        // Debug.Log("Angular Velocity (Radians/s): " + previousAngularVelocity + " " + currentRotation);
 
 
         pathingCooldown -= Time.deltaTime;
