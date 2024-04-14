@@ -1,11 +1,10 @@
 public enum HatType
 {
     NoHat,
-    // Dummy values, to be replaced with actual hat types
-    CowboyHat,
-    Crown,
+    // CowboyHat,
+    // Crown,
     HardHat,
     Horse,
-    Hood,
+    // Hood,
     WizardHat,
 }
