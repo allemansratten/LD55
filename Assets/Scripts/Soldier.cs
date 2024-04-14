@@ -108,9 +108,9 @@ public class Soldier : MonoBehaviour
 
         SkinnedMeshRenderer meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         GameObject hat = Instantiate(hatPrefab, transform);
-        hat.transform.localPosition = new Vector3(0, 0.1f, 0);
+        hat.transform.localPosition = new Vector3(0, 0, 0);
         currentHat = hat;
-        GameObject headBone = FindBoneByName("mixamorig:Head", meshRenderer);
+        GameObject headBone = FindBoneBySuffix("_Head", meshRenderer);
         if (headBone != null)
         {
             hat.transform.parent = headBone.transform;
@@ -118,12 +118,13 @@ public class Soldier : MonoBehaviour
         }
     }
 
-    private GameObject FindBoneByName(string name, SkinnedMeshRenderer skinnedMeshRenderer)
+    private GameObject FindBoneBySuffix(string suffix, SkinnedMeshRenderer skinnedMeshRenderer)
     {
         foreach (var bone in skinnedMeshRenderer.bones)
         {
-            if (bone.name == name)
+            if (bone.name.EndsWith(suffix))
             {
+                Debug.Log("Found bone: " + bone.name);
                 return bone.gameObject;
             }
         }
@@ -134,15 +135,15 @@ public class Soldier : MonoBehaviour
     {
         this.team = team;
 
-        GameObject child = transform.Find("Beta_Surface").gameObject;
-        SkinnedMeshRenderer meshRenderer = child.GetComponent<SkinnedMeshRenderer>();
+        // GameObject child = transform.Find("Beta_Surface").gameObject;
+        // SkinnedMeshRenderer meshRenderer = child.GetComponent<SkinnedMeshRenderer>();
 
-        var materials = new List<Material>
-        {
-            team == "A" ? teamAMaterial : teamBMaterial,
-            outlinerMaterial
-        };
-        meshRenderer.SetMaterials(materials);
+        // var materials = new List<Material>
+        // {
+        //     team == "A" ? teamAMaterial : teamBMaterial,
+        //     outlinerMaterial
+        // };
+        // meshRenderer.SetMaterials(materials);
     }
 
     public void Hurt(float damage)
