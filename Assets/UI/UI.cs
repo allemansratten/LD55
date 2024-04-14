@@ -14,8 +14,8 @@ public class UI : MonoBehaviour
 
         buttonStart.clicked += () =>
         {
-            // buttonStart.AddToClassList();
+            buttonStart.text = "TODO: reset?";
             EventManager.BattleStart();
-        };   
+        }; 
     }
 }

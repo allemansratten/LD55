@@ -237,7 +237,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.4
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 12
   avoidancePriority: 50
   m_AngularSpeed: 240
   m_StoppingDistance: 0
@@ -294,6 +294,7 @@ MonoBehaviour:
   projectileSpeed: 10
   projectileDamage: 25
   unitsPerSquad: 4
+  pathingCooldown: 0
   projectilePrefab: {fileID: 3610127390360354354, guid: 0bbe6ef442984d6ad9d168da2397f008,
     type: 3}
   outlinerMaterial: {fileID: 2100000, guid: 00c46ab89a9d478408a7f321142ea2ca, type: 2}
